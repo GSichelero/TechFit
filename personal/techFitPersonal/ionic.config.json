@@ -1,0 +1,7 @@
+{
+  "name": "techFitPersonal",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}
