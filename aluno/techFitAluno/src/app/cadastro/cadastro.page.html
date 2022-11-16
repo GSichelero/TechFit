@@ -1,0 +1,53 @@
+
+<ion-content>
+
+
+  <ion-card>
+    <div *ngIf="!segundoCadastro">
+
+      <ion-item>
+        <ion-label position="floating">Nome</ion-label>
+        <ion-input type="text" [(ngModel)]="cadastro.nome" #nome></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label position="floating">Email</ion-label>
+        <ion-input type="email"  [(ngModel)]="cadastro.email" #email></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label position="floating">Senha</ion-label>
+        <ion-input type="password"  [(ngModel)]="cadastro.senha" #senha></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label position="floating">Confirmação de senha</ion-label>
+        <ion-input type="password" #senhaConf></ion-input>
+      </ion-item>
+      
+      <ion-button (click)="segundoCadastro = true">Avançar</ion-button>
+    
+    </div>
+    
+    <div *ngIf="segundoCadastro">
+      <ion-item>
+        <ion-label position="floating">Idade</ion-label>
+        <ion-input type="number"  [(ngModel)]="cadastro.idade" #idade></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label position="floating">Sexo</ion-label>
+        <ion-input type=""  [(ngModel)]="cadastro.sexo" #sexo></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label position="floating">peso</ion-label>
+        <ion-input type="number"  [(ngModel)]="cadastro.peso" #peso></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label position="floating">Altura</ion-label>
+        <ion-input type="number"  [(ngModel)]="cadastro.altura" #altura></ion-input>
+      </ion-item>
+    
+      <ion-button (click)="cadastrar(cadastro)">Registrar</ion-button>
+    
+    </div>
+  </ion-card>
+
+
+</ion-content>
