@@ -10,12 +10,13 @@ const routes: Routes = [
     path: '',
     redirectTo: 'home',
     pathMatch: 'full'
-  },  {
-    path: 'listagem-semanas',
+  },
+  {
+    path: 'listagem/semanas',
     loadChildren: () => import('./pages/listagem-semanas/listagem-semanas.module').then( m => m.ListagemSemanasPageModule)
   },
   {
-    path: 'alteracao-treino',
+    path: 'alteracao/treino',
     loadChildren: () => import('./pages/alteracao-treino/alteracao-treino.module').then( m => m.AlteracaoTreinoPageModule)
   },
 
