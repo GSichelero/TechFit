@@ -1,0 +1,17 @@
+<ion-split-pane contentId="content">
+  <ion-menu contentId="content" type="overlay">
+    <ion-content>
+      <ion-list id="inbox-list">
+        <ion-img style="width: 150px; height: 150px;" src="https://external-content.duckduckgo.com/iu/?u=http%3A%2F%2Fcdn5.dibujos.net%2Fdibujos%2Fpintados%2F201624%2Fcara-1-mascaras-10666582.jpg&f=1&nofb=1&ipt=3ee300afaecc183af3a1f56244eb2be995d0b7bc7a1d327beccf0abda8fdbd1a&ipo=images"></ion-img>
+        <ion-note>{{user.name}}, {{user.age}}</ion-note>
+        <br>
+        <ion-note>{{user.email}}</ion-note>
+        <ion-item *ngFor="let page of Pages; let i = index">
+          <ion-button (click)="nextpage(page.url)" expand="block" fill="clear" color="dark" shape="round" auto-hide="false">
+            {{ page.title }}
+          </ion-button>
+        </ion-item>
+      </ion-list>
+    </ion-content>
+  </ion-menu>
+</ion-split-pane>
