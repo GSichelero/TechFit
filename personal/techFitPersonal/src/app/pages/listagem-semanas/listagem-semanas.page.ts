@@ -7,6 +7,11 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ListagemSemanasPage implements OnInit {
 
+  Semanas = [
+    {id: "AKOPDADFNSDFON", nome: "SEMANA 01"},
+    {id: "ASDFNAODNFAOSD", nome: "SEMANA 02"},
+    {id: "FADFNADSPFNSDF", nome: "SEMANA 03"},
+  ];
   constructor() { }
 
   ngOnInit() {
