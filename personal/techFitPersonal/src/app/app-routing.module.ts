@@ -12,6 +12,14 @@ const routes: Routes = [
     pathMatch: 'full'
   },
   {
+    path: 'login/cadastro',
+    loadChildren: () => import('./pages/cadastro/cadastro.module').then( m => m.CadastroPageModule)
+  },
+  {
+    path: 'login',
+    loadChildren: () => import('./pages/login/login.module').then( m => m.LoginPageModule)
+  },
+  {
     path: 'listagem/semanas',
     loadChildren: () => import('./pages/listagem-semanas/listagem-semanas.module').then( m => m.ListagemSemanasPageModule)
   },
