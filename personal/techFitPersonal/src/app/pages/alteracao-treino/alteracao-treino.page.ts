@@ -9,6 +9,9 @@ import { ItemReorderEventDetail } from '@ionic/angular';
 
 export class AlteracaoTreinoPage implements OnInit {
 
+  //TODO: Brendon Araújo - Mudar os dados de um json fixo para firebase;
+  //TODO: Brendon Araújo - Verificar com professor por que não dá erro ao remover o valor do array.
+
   Treino = {id: "AIDSFNASDVNASD", nome: "Aeróbico XXX"}; 
   horasDiaSemana = 0;
   diaSemanaEscolhido;
