@@ -1,53 +1,73 @@
 
 <ion-content>
 
+  <form [formGroup]="formulario" (submit)="cadastrar()" >
 
-  <ion-card>
     <div *ngIf="!segundoCadastro">
 
       <ion-item>
-        <ion-label position="floating">Nome</ion-label>
-        <ion-input type="text" [(ngModel)]="cadastro.nome" #nome></ion-input>
+        <ion-label position="stacked">Nome</ion-label>
+        <ion-input type="text" formControlName="nome" #nome></ion-input>
+        <ion-note *ngIf="formulario.controls.nome.touched" slot="error">
+          <span *ngIf="formulario.controls.nome.errors?.['required']"><ion-icon name="alert-outline"></ion-icon> Nome é obrigatório</span>
+        </ion-note>
       </ion-item>
       <ion-item>
-        <ion-label position="floating">Email</ion-label>
-        <ion-input type="email"  [(ngModel)]="cadastro.email" #email></ion-input>
+        <ion-label position="stacked">Email</ion-label>
+        <ion-input type="email"  formControlName="email" #email></ion-input>
+        <ion-note *ngIf="formulario.controls.email.touched" slot="error">
+          <span *ngIf="formulario.controls.nome.errors?.['required']"><ion-icon name="alert-outline"></ion-icon> Email é obrigatório</span>
+          <span *ngIf="formulario.controls.nome.errors?.['email']"><ion-icon name="alert-outline"></ion-icon> Email inválido</span>
+        </ion-note>
       </ion-item>
       <ion-item>
-        <ion-label position="floating">Senha</ion-label>
-        <ion-input type="password"  [(ngModel)]="cadastro.senha" #senha></ion-input>
+        <ion-label position="stacked">Senha</ion-label>
+        <ion-input type="password"  formControlName="senha" #senha></ion-input>
       </ion-item>
       <ion-item>
-        <ion-label position="floating">Confirmação de senha</ion-label>
-        <ion-input type="password" #senhaConf></ion-input>
+        <ion-label position="stacked">Confirmação de senha</ion-label>
+        <ion-input type="password" formControlName="senhaConf" #senhaConf></ion-input>
+        <ion-note *ngIf="formulario.controls.nome.senhaConf" slot="error">
+          <span *ngIf="erroSenhaConf"><ion-icon name="alert-outline"></ion-icon>Senhas devem ser iguais</span>
+        </ion-note>
       </ion-item>
       
-      <ion-button (click)="segundoCadastro = true">Avançar</ion-button>
+      <ion-button (click)="verificaCadastro(formulario.value)">Avançar</ion-button>
     
     </div>
     
     <div *ngIf="segundoCadastro">
       <ion-item>
-        <ion-label position="floating">Idade</ion-label>
-        <ion-input type="number"  [(ngModel)]="cadastro.idade" #idade></ion-input>
+        <ion-label position="stacked">Idade</ion-label>
+        <ion-input type="number" formControlName="idade" #idade></ion-input>
       </ion-item>
       <ion-item>
-        <ion-label position="floating">Sexo</ion-label>
-        <ion-input type=""  [(ngModel)]="cadastro.sexo" #sexo></ion-input>
+        <ion-label position="stacked">Sexo</ion-label>
+        <!-- <ion-input type=""  [(ngModel)]="cadastro.sexo" #sexo></ion-input> -->
+        <ion-radio-group formControlName="sexo" >
+          <ion-item>
+            <ion-label>feminino</ion-label>
+            <ion-radio value="feminino"></ion-radio>
+          </ion-item>
+          <ion-item>
+            <ion-label>masculino</ion-label>
+            <ion-radio value="masculino"></ion-radio>
+          </ion-item>
+        </ion-radio-group>
       </ion-item>
       <ion-item>
-        <ion-label position="floating">peso</ion-label>
-        <ion-input type="number"  [(ngModel)]="cadastro.peso" #peso></ion-input>
+        <ion-label position="stacked">peso</ion-label>
+        <ion-input type="number"  formControlName="peso" #peso></ion-input>
       </ion-item>
       <ion-item>
-        <ion-label position="floating">Altura</ion-label>
-        <ion-input type="number"  [(ngModel)]="cadastro.altura" #altura></ion-input>
+        <ion-label position="stacked">Altura</ion-label>
+        <ion-input type="number"  formControlName="altura" #altura></ion-input>
       </ion-item>
     
-      <ion-button (click)="cadastrar(cadastro)">Registrar</ion-button>
+      <ion-button type="submit">Registrar</ion-button>
     
     </div>
-  </ion-card>
-
+    
+</form>
 
 </ion-content>

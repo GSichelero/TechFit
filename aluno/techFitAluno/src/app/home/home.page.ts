@@ -1,4 +1,6 @@
 import { Component } from '@angular/core';
+import { Router } from '@angular/router';
+import { FirebaseService } from '../services/firebase.service';
 
 @Component({
   selector: 'app-home',
@@ -7,6 +9,12 @@ import { Component } from '@angular/core';
 })
 export class HomePage {
 
-  constructor() {}
+  constructor( public firebaseService: FirebaseService, public router: Router ) {}
+
+
+  public logOut(){
+    this.firebaseService.logout()
+    this.router.navigate(['login']);
+  }
 
 }

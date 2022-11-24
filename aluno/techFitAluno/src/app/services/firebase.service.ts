@@ -10,16 +10,20 @@ export class FirebaseService {
 
   public usuario;
   private usuarioSubject: BehaviorSubject<any|null>;
+
+  public userData: any;
   
   constructor( private firebase: AngularFirestore, public auth: AngularFireAuth ) { 
-    debugger
+    //debugger
 
     this.auth.authState.subscribe( user => {
       if (user) {
-        this.carregarUsuario(user.uid);
+        this.userData = user;
+        localStorage.setItem('user', JSON.stringify(this.userData));
+        JSON.parse(localStorage.getItem('user')!);
       } else {
-        this.usuario = null;
-        this.usuarioSubject. next(null);
+        localStorage.setItem('user', 'null');
+        JSON.parse(localStorage.getItem('user')!);
       }
     })
 
@@ -34,35 +38,22 @@ export class FirebaseService {
       return this.auth.signOut();
     }
 
-    public cadastrarUser(email, senha, nome, idade, sexo, peso, altura, tipo ='aluno') {
-      debugger
-    return this.auth.createUserWithEmailAndPassword(email, senha).then((userCredential)  => {
+    public cadastrarUser(cadastro) {
+    return this.auth.createUserWithEmailAndPassword(cadastro.email, cadastro.senha).then((userCredential)  => {
       this.firebase.collection('users')
         .doc(userCredential.user.uid)
         .set({
-          email
-          , senha
-          , nome  
-          , tipo
-          , idade
-          , sexo
-          , peso
-          , altura
+          cadastro
         })
 
+        
     });
   }   
-
-  private async carregarUsuario(id) {
-    const docRef = await this.firebase
-      .collection('users')
-      .doc(id)
-      .get().toPromise();
-
-    this.usuario = {id, ...docRef.data() as any};
-    this.usuarioSubject.next(this.usuario);
-    console.log(this.usuario);
-  }
   
+  get isLoggedIn(): boolean {
+    debugger
+    const user = JSON.parse(localStorage.getItem('user')!);
+    return user !== 'null' ? true : false;
+  }
   
 }

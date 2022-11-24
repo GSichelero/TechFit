@@ -1,6 +1,7 @@
 export interface Aluno {
     email: string; 
     senha: string; 
+    senhaConf: string;
     nome: string;    
     tipo: string;
     idade: number;

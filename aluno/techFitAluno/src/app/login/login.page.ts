@@ -17,7 +17,6 @@ export class LoginPage implements OnInit {
 
   public async login(email, senha) {
     try {
-      debugger
       await this.firebaseService.login(email, senha);
       this.router.navigateByUrl('home');
     }catch (e) {

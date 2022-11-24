@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FirebaseService } from '../services/firebase.service';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Aluno } from './aluno';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-cadastro',
@@ -9,38 +11,46 @@ import { Aluno } from './aluno';
 })
 export class CadastroPage implements OnInit {
 
+  public formulario: FormGroup;
   public segundoCadastro = false;
 
-  public cadastro: Aluno = {
-    email: null
-    , senha: null
-    , nome: null  
-    , tipo: null
-    , idade: null
-    , sexo: null
-    , peso: null
-    , altura: null
-  };
+  public erroSenhaConf = false;
 
-  constructor( public firebaseService: FirebaseService ) { }
+  constructor( public firebaseService: FirebaseService, public fb: FormBuilder, public router: Router ) {
+
+    this.formulario = fb.group({
+      nome: ['', Validators.compose([Validators.required, Validators.minLength(5)])],
+      email: ['',Validators.compose([Validators.required, Validators.email])],
+      senha: ['', Validators.compose([Validators.required, Validators.minLength(6)])],
+      senhaConf: ['', Validators.compose([Validators.required, Validators.minLength(6)])],
+      idade: [''],
+      sexo: ['',Validators.required],
+      peso: ['',Validators.required],
+      altura: ['',Validators.required],
+      tipo: ['aluno']
+    });
+   }
 
   ngOnInit() {
   }
 
 
-  async cadastrar(cadastro) {
-    debugger
-
-    this.verificaCadastro();
-
-    await this.firebaseService.cadastrarUser(cadastro.email, cadastro.senha, cadastro.nome, cadastro.idade, cadastro.sexo, cadastro.peso, cadastro.altura, cadastro.tipo);
-    this.segundoCadastro = true;
-    //this.router.navigateByUrl('home');
+  async cadastrar() {
+    await this.firebaseService.cadastrarUser(this.formulario.value).then(() =>
+        this.router.navigateByUrl('/home')
+    );
   }
 
-  public verificaCadastro() {
-    // verifica o formulario
+  public verificaCadastro(evento) {
+      if (evento.senha != evento.senhaConf) {
+          this.erroSenhaConf = true;
+          this.formulario.markAllAsTouched();
+      } else {
+        this.erroSenhaConf = false;
+        this.segundoCadastro = true
+      }
   }
 
 
 }
+
