@@ -1,9 +1,39 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title>alteracaoTreino</ion-title>
+    <ion-title>Alteração do Treino {{Treino.nome}}</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
-
+  <ion-grid>
+    <ion-row>
+      <ion-col>
+        <ion-list>
+          <ion-item  *ngFor="let Exercicio of ExerciciosPadrao" >
+            {{Exercicio.nome}}
+            <ion-button (click)="adicionaExercicio(Exercicio)" slot="end">Add</ion-button>
+          </ion-item>
+        </ion-list>
+      </ion-col>
+      <ion-col>
+        <ion-button (click)="filtraListagemExercicoSemana(0)">S</ion-button>
+        <ion-button (click)="filtraListagemExercicoSemana(1)">T</ion-button>
+        <ion-button (click)="filtraListagemExercicoSemana(2)">Q</ion-button>
+        <ion-button (click)="filtraListagemExercicoSemana(3)">Q</ion-button>
+        <ion-button (click)="filtraListagemExercicoSemana(4)">S</ion-button>
+        <ion-button (click)="filtraListagemExercicoSemana(5)">S</ion-button>
+        <ion-button (click)="filtraListagemExercicoSemana(6)">D</ion-button>
+        <p>Horas de treino - {{horasDiaSemana}}</p>
+        <ion-list>
+          <ion-reorder-group [disabled]="false" (ionItemReorder)="handleReorder($any($event))">
+            <ion-item style="padding: 1px;" *ngFor="let Exercicio of exerciciosFiltrados" >
+              {{Exercicio.nome??''}} - {{Exercicio.horas??0}} Horas - {{Exercicio.repeticao??1}} Repetições
+              <ion-button (click)="retiraExercicio(Exercicio)" slot="end">Remove</ion-button>
+              <ion-reorder slot="end"></ion-reorder>
+            </ion-item>
+          </ion-reorder-group>
+        </ion-list>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
 </ion-content>

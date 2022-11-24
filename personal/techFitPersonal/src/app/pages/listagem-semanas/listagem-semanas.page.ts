@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-listagem-semanas',
@@ -7,9 +8,13 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ListagemSemanasPage implements OnInit {
 
-  constructor() { }
+  Semanas = [
+    {id: "AKOPDADFNSDFON", nome: "SEMANA 01"},
+    {id: "ASDFNAODNFAOSD", nome: "SEMANA 02"},
+    {id: "FADFNADSPFNSDF", nome: "SEMANA 03"},
+  ];
+  constructor(private route: Router) { }
 
   ngOnInit() {
   }
-
 }
