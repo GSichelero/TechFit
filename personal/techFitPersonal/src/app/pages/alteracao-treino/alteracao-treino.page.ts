@@ -10,6 +10,7 @@ import { ItemReorderEventDetail } from '@ionic/angular';
 export class AlteracaoTreinoPage implements OnInit {
 
   Treino = {id: "AIDSFNASDVNASD", nome: "Aeróbico XXX"}; 
+  horasDiaSemana = 0;
   diaSemanaEscolhido;
 
   ExerciciosPadrao = [
@@ -36,7 +37,8 @@ export class AlteracaoTreinoPage implements OnInit {
   constructor() { }
 
   ngOnInit() {
-    this.exerciciosFiltrados = this.ExerciciosSemana.filter(es => es.diaSemana == 0);
+    //this.exerciciosFiltrados = this.ExerciciosSemana.filter(es => es.diaSemana == 0);
+    this.filtraListagemExercicoSemana(0);
   }
 
   handleReorder(ev: CustomEvent<ItemReorderEventDetail>) {
@@ -45,6 +47,9 @@ export class AlteracaoTreinoPage implements OnInit {
 
   filtraListagemExercicoSemana(diaSemana){
     this.exerciciosFiltrados = this.ExerciciosSemana.filter(es => es.diaSemana == diaSemana);
+    this.horasDiaSemana = this.exerciciosFiltrados.reduce((soma, semana) => {
+      return soma + semana.horas;
+    }, 0);
   }
 
   adicionaExercicio(Exercicio){

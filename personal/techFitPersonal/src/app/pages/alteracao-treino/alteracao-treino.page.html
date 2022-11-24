@@ -23,7 +23,7 @@
         <ion-button (click)="filtraListagemExercicoSemana(4)">S</ion-button>
         <ion-button (click)="filtraListagemExercicoSemana(5)">S</ion-button>
         <ion-button (click)="filtraListagemExercicoSemana(6)">D</ion-button>
-        <p>Horas de treino - </p>
+        <p>Horas de treino - {{horasDiaSemana}}</p>
         <ion-list>
           <ion-reorder-group [disabled]="false" (ionItemReorder)="handleReorder($any($event))">
             <ion-item style="padding: 1px;" *ngFor="let Exercicio of exerciciosFiltrados" >
