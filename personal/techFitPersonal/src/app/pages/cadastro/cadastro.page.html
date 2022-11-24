@@ -1,0 +1,61 @@
+
+<ion-content>
+
+
+  <ion-card>
+    <div *ngIf="!segundoCadastro">
+
+      <ion-item>
+        <ion-label position="floating">Nome</ion-label>
+        <ion-input type="text" [(ngModel)]="cadastro.nome" #nome></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label position="floating">Email</ion-label>
+        <ion-input type="email"  [(ngModel)]="cadastro.email" #email></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label position="floating">Senha</ion-label>
+        <ion-input type="password"  [(ngModel)]="cadastro.senha" #senha></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label position="floating">Confirmação de senha</ion-label>
+        <ion-input type="password" #senhaConf></ion-input>
+      </ion-item>
+      
+      <ion-button (click)="segundoCadastro = true">Avançar</ion-button>
+    
+    </div>
+    
+    <div *ngIf="segundoCadastro">
+      <ion-item>
+        <ion-label>Foto</ion-label>
+        <ion-input type="file"  [(ngModel)]="cadastro.foto" #foto></ion-input>
+      </ion-item>
+
+      <ion-item>
+        <ion-label position="floating">Especialização</ion-label>
+        <ion-select [(ngModel)]="cadastro.especializacao" #especializacao>
+          <ion-select-option *ngFor="let equipe of equipes">{{equipe}}</ion-select-option>
+        </ion-select>
+      </ion-item>
+
+      <ion-item>
+        <ion-label position="floating">Idade</ion-label>
+        <ion-input type="number"  [(ngModel)]="cadastro.idade" #idade></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label position="floating">Região</ion-label>
+        <ion-input type="text"  [(ngModel)]="cadastro.regiao" #regiao></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label>Descrição</ion-label>
+        <ion-textarea [(ngModel)]="cadastro.descricao" #regiao cols="30" rows="10"></ion-textarea>
+      </ion-item>
+    
+      <ion-button (click)="cadastrar(cadastro)">Registrar</ion-button>
+    
+    </div>
+  </ion-card>
+
+
+</ion-content>
