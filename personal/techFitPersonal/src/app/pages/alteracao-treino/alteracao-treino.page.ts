@@ -1,5 +1,6 @@
+import { AjusteExerciciosModalComponent } from './../../modals/ajuste-exercicios-modal/ajuste-exercicios-modal.component';
 import { Component, OnInit } from '@angular/core';
-import { ItemReorderEventDetail } from '@ionic/angular';
+import { ItemReorderEventDetail, ModalController } from '@ionic/angular';
 
 @Component({
   selector: 'app-alteracao-treino',
@@ -37,7 +38,7 @@ export class AlteracaoTreinoPage implements OnInit {
   ];
 
   exerciciosFiltrados = [];
-  constructor() { }
+  constructor(private modalController: ModalController,) { }
 
   ngOnInit() {
     //this.exerciciosFiltrados = this.ExerciciosSemana.filter(es => es.diaSemana == 0);
@@ -48,23 +49,28 @@ export class AlteracaoTreinoPage implements OnInit {
     this.exerciciosFiltrados = ev.detail.complete(this.exerciciosFiltrados);
   }
 
-  filtraListagemExercicoSemana(diaSemana){
+  public filtraListagemExercicoSemana(diaSemana){
     this.exerciciosFiltrados = this.ExerciciosSemana.filter(es => es.diaSemana == diaSemana);
     this.horasDiaSemana = this.exerciciosFiltrados.reduce((soma, semana) => {
       return soma + semana.horas;
     }, 0);
   }
 
-  adicionaExercicio(Exercicio){
+  public adicionaExercicio(Exercicio){
+    this.abrirModal();
     this.exerciciosFiltrados.push({nome: Exercicio.nome, diaSemana: 0});
   }
 
-  retiraExercicio(Exercico){
-    console.log(Exercico);
-    this.exerciciosFiltrados.forEach((element,index)=>{
-      if(element.id == Exercico.id) delete this.exerciciosFiltrados[index];
-    });
-
+  public retiraExercicio(index){
+    this.exerciciosFiltrados.splice(index,1);
   }
 
+  private async abrirModal(){
+    let modal = await this.modalController.create({
+      component: AjusteExerciciosModalComponent,
+      initialBreakpoint : 0.25,
+      breakpoints: [0,0.25,0.75]
+    });
+    await modal.present();
+  }
 }

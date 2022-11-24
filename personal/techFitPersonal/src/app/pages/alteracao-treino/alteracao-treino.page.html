@@ -16,19 +16,20 @@
         </ion-list>
       </ion-col>
       <ion-col>
-        <ion-button (click)="filtraListagemExercicoSemana(0)">S</ion-button>
-        <ion-button (click)="filtraListagemExercicoSemana(1)">T</ion-button>
-        <ion-button (click)="filtraListagemExercicoSemana(2)">Q</ion-button>
-        <ion-button (click)="filtraListagemExercicoSemana(3)">Q</ion-button>
-        <ion-button (click)="filtraListagemExercicoSemana(4)">S</ion-button>
-        <ion-button (click)="filtraListagemExercicoSemana(5)">S</ion-button>
-        <ion-button (click)="filtraListagemExercicoSemana(6)">D</ion-button>
-        <p>Horas de treino - {{horasDiaSemana}}</p>
+        <div style="margin: 1px;">
+          <ion-button (click)="filtraListagemExercicoSemana(0)">S</ion-button>
+          <ion-button (click)="filtraListagemExercicoSemana(1)">T</ion-button>
+          <ion-button (click)="filtraListagemExercicoSemana(2)">Q</ion-button>
+          <ion-button (click)="filtraListagemExercicoSemana(3)">Q</ion-button>
+          <ion-button (click)="filtraListagemExercicoSemana(4)">S</ion-button>
+          <ion-button (click)="filtraListagemExercicoSemana(5)">S</ion-button>
+          <ion-button (click)="filtraListagemExercicoSemana(6)">D</ion-button>
+        </div>
         <ion-list>
           <ion-reorder-group [disabled]="false" (ionItemReorder)="handleReorder($any($event))">
-            <ion-item style="padding: 1px;" *ngFor="let Exercicio of exerciciosFiltrados" >
-              {{Exercicio.nome??''}} - {{Exercicio.horas??0}} Horas - {{Exercicio.repeticao??1}} Repetições
-              <ion-button (click)="retiraExercicio(Exercicio)" slot="end">Remove</ion-button>
+            <ion-item style="padding: 1px;" *ngFor="let Exercicio of exerciciosFiltrados; index as i" >
+              {{Exercicio.nome??''}} - {{Exercicio.horas??0}} descanso - {{Exercicio.repeticao??1}} Repetições
+              <ion-button (click)="retiraExercicio(i)" slot="end">Remove</ion-button>
               <ion-reorder slot="end"></ion-reorder>
             </ion-item>
           </ion-reorder-group>

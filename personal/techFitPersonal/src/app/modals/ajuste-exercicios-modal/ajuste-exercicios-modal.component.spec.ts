@@ -1,19 +1,19 @@
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { IonicModule } from '@ionic/angular';
 
-import { AlteracaoTreinoPage } from './alteracao-treino.page';
+import { AjusteExerciciosModalComponent } from './ajuste-exercicios-modal.component';
 
-describe('AlteracaoTreinoPage', () => {
-  let component: AlteracaoTreinoPage;
-  let fixture: ComponentFixture<AlteracaoTreinoPage>;
+describe('AjusteExerciciosModalComponent', () => {
+  let component: AjusteExerciciosModalComponent;
+  let fixture: ComponentFixture<AjusteExerciciosModalComponent>;
 
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
-      declarations: [ AlteracaoTreinoPage ],
+      declarations: [ AjusteExerciciosModalComponent ],
       imports: [IonicModule.forRoot()]
     }).compileComponents();
 
-    fixture = TestBed.createComponent(AlteracaoTreinoPage);
+    fixture = TestBed.createComponent(AjusteExerciciosModalComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   }));
