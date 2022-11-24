@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
+import { AuthGuard } from './shared/auth.guard';
 
 const routes: Routes = [
   {
@@ -8,7 +9,7 @@ const routes: Routes = [
   },
   {
     path: '',
-    redirectTo: 'home',
+    redirectTo: 'login',
     pathMatch: 'full'
   },
   {
@@ -21,11 +22,13 @@ const routes: Routes = [
   },
   {
     path: 'listagem/semanas',
-    loadChildren: () => import('./pages/listagem-semanas/listagem-semanas.module').then( m => m.ListagemSemanasPageModule)
+    loadChildren: () => import('./pages/listagem-semanas/listagem-semanas.module').then( m => m.ListagemSemanasPageModule),
+    canActivate: [AuthGuard]
   },
   {
     path: 'alteracao/treino',
-    loadChildren: () => import('./pages/alteracao-treino/alteracao-treino.module').then( m => m.AlteracaoTreinoPageModule)
+    loadChildren: () => import('./pages/alteracao-treino/alteracao-treino.module').then( m => m.AlteracaoTreinoPageModule),
+    canActivate: [AuthGuard]
   },
 
 ];

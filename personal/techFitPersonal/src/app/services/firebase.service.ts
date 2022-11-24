@@ -9,17 +9,20 @@ import { BehaviorSubject } from 'rxjs';
 export class FirebaseService {
 
   public usuario;
+  public userData: any;
   private usuarioSubject: BehaviorSubject<any|null>;
 
 constructor( private firebase: AngularFirestore, public auth: AngularFireAuth ) { 
-  // this.auth.authState.subscribe( user => {
-  //   if (user) {
-  //     this.carregarUsuario(user.uid);
-  //   } else {
-  //     this.usuario = null;
-  //     this.usuarioSubject. next(null);
-  //   }
-  // })
+  this.auth.authState.subscribe( user => {
+    if (user) {
+      this.userData = user;
+      localStorage.setItem('user', JSON.stringify(this.userData));
+      JSON.parse(localStorage.getItem('user')!);
+    } else {
+      localStorage.setItem('user', 'null');
+      JSON.parse(localStorage.getItem('user')!);
+    }
+  })
 }
 
 
@@ -29,26 +32,18 @@ public login(email, senha) {
 }
 
 public logout() {
-  debugger;
   return this.auth.signOut();
 }
 
-public cadastrarUser(email, senha, nome, foto, especializacao, idade, regiao, descricao, tipo) {
-return this.auth.createUserWithEmailAndPassword(email, senha).then((userCredential)  => {
+public cadastrarUser(cadastro) {
+return this.auth.createUserWithEmailAndPassword(cadastro.email, cadastro.senha).then((userCredential)  => {
   this.firebase.collection('users')
     .doc(userCredential.user.uid)
     .set({
-      email
-      , senha
-      , nome 
-      , tipo
-      , foto
-      , especializacao
-      , idade
-      , regiao
-      , descricao
+      cadastro
     })
 
+    
 });
 }   
 
@@ -63,10 +58,10 @@ return this.auth.createUserWithEmailAndPassword(email, senha).then((userCredenti
 // console.log(this.usuario);
 // }
 
-public getUsuarioAutenticado() {
-  this.usuarioSubject = new BehaviorSubject<any>(this.usuario);
+get isLoggedIn(): boolean {
   debugger
-  return this.usuarioSubject
+  const user = JSON.parse(localStorage.getItem('user')!);
+  return user !== 'null' ? true : false;
 }
 
 }

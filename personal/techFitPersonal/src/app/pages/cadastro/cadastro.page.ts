@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { FirebaseService } from 'src/app/services/firebase.service';
 import { Personal } from './personal';
@@ -10,39 +11,48 @@ import { Personal } from './personal';
 })
 export class CadastroPage implements OnInit {
 
-  public segundoCadastro = fal]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]
-  public cadastro: Personal = {
-    email: null
-    , senha: null
-    , nome: null  
-    , tipo: null
-    , foto: null
-    , especializacao: null
-    , idade: null
-    , regiao: null
-    , descricao: null
-  };
+  public formulario: FormGroup;
+  public segundoCadastro = false;
+  public erroSenhaConf = false;
 
-  constructor( public firebaseService: FirebaseService 
-    , public router: Router) { 
-    this.firebaseService.getUsuarioAutenticado().subscribe(resp => {
-      console.log(resp);
+  public especializacoes = [
+    'musculação','Dança','Corrida', 'Triaton','Fitness',
+    'Artes marciais','Reabilitação musculoesqueletica', 'Esportes coletivos', 'Pilates', 'Yoga', 'Treinamento funcional'
+
+  ]
+
+  constructor( public firebaseService: FirebaseService, public fb: FormBuilder, public router: Router) { 
+    this.formulario = fb.group({
+      nome: ['', Validators.compose([Validators.required, Validators.minLength(5)])],
+      email: ['',Validators.compose([Validators.required, Validators.email])],
+      senha: ['', Validators.compose([Validators.required, Validators.minLength(6)])],
+      senhaConf: ['', Validators.compose([Validators.required, Validators.minLength(6)])],
+      //foto: [''],
+      especializacao: ['',Validators.required],
+      idade: ['',Validators.required],
+      regiao: ['',Validators.required],
+      descricao: [''],
+      tipo: ['personal']
     });
   }
 
   ngOnInit() {
   }
 
-  async cadastrar(cadastro) {
-    this.verificaCadastro();
-    cadastro.tipo = 'personal';
-    await this.firebaseService.cadastrarUser(cadastro.email, cadastro.senha, cadastro.nome, cadastro.foto, cadastro.especializacao, cadastro.idade, cadastro.regiao, cadastro.descricao, cadastro.tipo);
-    this.segundoCadastro = true;
-    this.router.navigateByUrl('home');
+  async cadastrar() {
+    await this.firebaseService.cadastrarUser(this.formulario.value).then(() =>
+        this.router.navigateByUrl('/home')
+    );
   }
 
-  public verificaCadastro() {
-    // verifica o formulario
+  public verificaCadastro(evento) {
+      if (evento.senha != evento.senhaConf) {
+          this.erroSenhaConf = true;
+          this.formulario.markAllAsTouched();
+      } else {
+        this.erroSenhaConf = false;
+        this.segundoCadastro = true
+      }
   }
 
 }
