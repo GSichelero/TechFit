@@ -10,7 +10,7 @@ import { Personal } from './personal';
 })
 export class CadastroPage implements OnInit {
 
-  public segundoCadastro = fal]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]
+  public segundoCadastro = false
   public cadastro: Personal = {
     email: null
     , senha: null
