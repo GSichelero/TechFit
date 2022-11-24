@@ -16,7 +16,8 @@ export class MenuComponent implements OnInit {
 
   Pages = [
     { title: 'Home', url: '/home' },
-    { title: 'Listagem Semanas', url: '/listagem/semanas' }
+    { title: 'Listagem Semanas', url: '/listagem/semanas' },
+    { title: 'Alteração Treino', url: '/alteracao/treino'}
   ];
   constructor(private route: Router) { 
   }
