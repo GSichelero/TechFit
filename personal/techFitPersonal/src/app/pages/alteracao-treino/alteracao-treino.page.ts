@@ -58,7 +58,7 @@ export class AlteracaoTreinoPage implements OnInit {
 
   public adicionaExercicio(Exercicio){
     this.abrirModal();
-    this.exerciciosFiltrados.push({nome: Exercicio.nome, diaSemana: 0});
+    //this.exerciciosFiltrados.push({nome: Exercicio.nome, diaSemana: 0});
   }
 
   public retiraExercicio(index){
@@ -72,5 +72,11 @@ export class AlteracaoTreinoPage implements OnInit {
       breakpoints: [0,0.25,0.75]
     });
     await modal.present();
+
+    modal.onWillDismiss().then( result => {
+      if (result.role == 'confirm') {
+        this.exerciciosFiltrados.push(result.data);
+      }
+    });
   }
 }

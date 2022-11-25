@@ -9,8 +9,8 @@ import { ModalController } from '@ionic/angular';
 export class AjusteExerciciosModalComponent implements OnInit {
 
   constructor(private modalController: ModalController) { }
-
-  Exercicio = {id: 'SDVNSFVDF', nome: 'Agachamento', semanaId: '', diaSemana: 0, horas: 0.30};
+  repeticao:string
+  Exercicio = {id: 'SDVNSFVDF', nome: 'Agachamento', semanaId: '', diaSemana: 0, horas: 1, repeticao:1};
 
   ngOnInit() {}
 
@@ -19,7 +19,8 @@ export class AjusteExerciciosModalComponent implements OnInit {
   }
 
   public confirm() {
-    this.modalController.dismiss({}, 'confirm');
+    this.modalController.dismiss(this.Exercicio, 'confirm');
+    console.log(this.repeticao);
   }
 
 }

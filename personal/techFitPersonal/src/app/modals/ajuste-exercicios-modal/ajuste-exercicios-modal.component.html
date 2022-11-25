@@ -1,8 +1,27 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
-    <ion-title>Header</ion-title>
+    <ion-buttons slot="start">
+      <ion-button (click)="cancel()">Cancel</ion-button>
+    </ion-buttons>
+    <ion-title>Ajuste o exercíco {{Exercicio.nome}}</ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)="confirm()" [strong]="true">Confirm</ion-button>
+    </ion-buttons>
   </ion-toolbar>
 </ion-header>
 <ion-content class="ion-padding">
-  <h1>Content</h1>
+  <ion-item>
+    <ion-label>
+      Tempo de decanso:
+    </ion-label>
+    <ion-input type="time">
+    </ion-input>
+  </ion-item>
+  <ion-item>
+    <ion-label>
+      Quantidade de repeições:
+    </ion-label>
+    <ion-input type="text" [(ngModel)]="repeticao">
+    </ion-input>
+  </ion-item>
 </ion-content>
