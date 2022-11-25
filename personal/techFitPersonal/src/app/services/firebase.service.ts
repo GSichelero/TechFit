@@ -61,7 +61,7 @@ return this.auth.createUserWithEmailAndPassword(cadastro.email, cadastro.senha).
 get isLoggedIn(): boolean {
   debugger
   const user = JSON.parse(localStorage.getItem('user')!);
-  return user !== 'null' ? true : false;
+  return user !== null ? true : false;
 }
 
 }
