@@ -12,56 +12,59 @@ export class FirebaseService {
   public userData: any;
   private usuarioSubject: BehaviorSubject<any|null>;
 
-constructor( private firebase: AngularFirestore, public auth: AngularFireAuth ) { 
-  this.auth.authState.subscribe( user => {
-    if (user) {
-      this.userData = user;
-      localStorage.setItem('user', JSON.stringify(this.userData));
-      JSON.parse(localStorage.getItem('user')!);
-    } else {
-      localStorage.setItem('user', 'null');
-      JSON.parse(localStorage.getItem('user')!);
-    }
-  })
-}
-
-
-
-public login(email, senha) {
-  return this.auth.signInWithEmailAndPassword(email, senha);
-}
-
-public logout() {
-  return this.auth.signOut();
-}
-
-public cadastrarUser(cadastro) {
-return this.auth.createUserWithEmailAndPassword(cadastro.email, cadastro.senha).then((userCredential)  => {
-  this.firebase.collection('users')
-    .doc(userCredential.user.uid)
-    .set({
-      cadastro
+  constructor( private firebase: AngularFirestore, public auth: AngularFireAuth ) { 
+    this.auth.authState.subscribe( user => {
+      if (user) {
+        this.userData = user;
+        localStorage.setItem('user', JSON.stringify(this.userData));
+        JSON.parse(localStorage.getItem('user')!);
+      } else {
+        localStorage.setItem('user', 'null');
+        JSON.parse(localStorage.getItem('user')!);
+      }
     })
+  }
 
-    
-});
-}   
+  public login(email, senha) {
+    return this.auth.signInWithEmailAndPassword(email, senha);
+  }
 
-// private async carregarUsuario(id) {
-// const docRef = await this.firebase
-//   .collection('users')
-//   .doc(id)
-//   .get().toPromise();
+  public logout() {
+    return this.auth.signOut();
+  }
 
-// this.usuario = {id, ...docRef.data() as any};
-// this.usuarioSubject.next(this.usuario);
-// console.log(this.usuario);
-// }
+  public cadastrarUser(cadastro) {
+  return this.auth.createUserWithEmailAndPassword(cadastro.email, cadastro.senha).then((userCredential)  => {
+    this.firebase.collection('users')
+      .doc(userCredential.user.uid)
+      .set({
+        cadastro
+      })
 
-get isLoggedIn(): boolean {
-  debugger
-  const user = JSON.parse(localStorage.getItem('user')!);
-  return user !== null ? true : false;
-}
+      
+  });
+  }   
+
+  // private async carregarUsuario(id) {
+  // const docRef = await this.firebase
+  //   .collection('users')
+  //   .doc(id)
+  //   .get().toPromise();
+
+  // this.usuario = {id, ...docRef.data() as any};
+  // this.usuarioSubject.next(this.usuario);
+  // console.log(this.usuario);
+  // }
+
+  public isUsuarioLogado():boolean{
+    const user = JSON.parse(localStorage.getItem('user')!);
+    return user !== null ? true : false;
+  }
+
+  get isLoggedIn(): boolean {
+    // debugger
+    const user = JSON.parse(localStorage.getItem('user')!);
+    return user !== null ? true : false;
+  }
 
 }

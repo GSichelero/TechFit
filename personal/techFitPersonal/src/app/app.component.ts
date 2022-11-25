@@ -1,3 +1,4 @@
+import { FirebaseService } from 'src/app/services/firebase.service';
 import { Component } from '@angular/core';
 import { MenuComponent } from './components/menu/menu.component';
 
@@ -7,5 +8,11 @@ import { MenuComponent } from './components/menu/menu.component';
   styleUrls: ['app.component.scss'],
 })
 export class AppComponent {
-  constructor() {}
+
+  isMostarMenu: boolean = true;
+
+  constructor(private firebase: FirebaseService) {
+    //this.isMostarMenu = firebase.isUsuarioLogado();
+
+  }
 }
