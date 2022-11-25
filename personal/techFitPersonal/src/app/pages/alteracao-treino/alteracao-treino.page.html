@@ -11,7 +11,9 @@
         <ion-list>
           <ion-item  *ngFor="let Exercicio of ExerciciosPadrao" >
             {{Exercicio.nome}}
-            <ion-button (click)="adicionaExercicio(Exercicio)" slot="end">Add</ion-button>
+            <ion-buttons slot="end">
+              <ion-button [strong]="true" (click)="adicionaExercicio(Exercicio)" slot="end">Add</ion-button>
+            </ion-buttons>
           </ion-item>
         </ion-list>
       </ion-col>
