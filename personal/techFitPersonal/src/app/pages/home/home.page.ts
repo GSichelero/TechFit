@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
+import { AlunosService } from 'src/app/services/alunos.service';
 import { FirebaseService } from 'src/app/services/firebase.service';
+
 
 @Component({
   selector: 'app-home',
@@ -12,7 +14,8 @@ export class HomePage {
   public usuario;
 
   constructor( public firebaseService: FirebaseService 
-    , public router: Router ) {}
+    , public router: Router
+    , private alunosService: AlunosService ) {}
 
   ngOnInit() {
     // this.firebaseService.getUsuarioAutenticado().subscribe(usuario => {
@@ -24,5 +27,18 @@ export class HomePage {
     //   }
     // });
   }
+
+
+  public teste() {
+    this.alunosService.getAlunosVinculados();
+  }
+
+  public teste2() {
+    
+  }
+
+
+
+
 
 }

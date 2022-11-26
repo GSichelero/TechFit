@@ -14,7 +14,6 @@ export class FirebaseService {
   public userData: any;
   
   constructor( private firebase: AngularFirestore, public auth: AngularFireAuth ) { 
-    //debugger
 
     this.auth.authState.subscribe( user => {
       if (user) {
@@ -40,6 +39,7 @@ export class FirebaseService {
 
     public cadastrarUser(cadastro) {
     return this.auth.createUserWithEmailAndPassword(cadastro.email, cadastro.senha).then((userCredential)  => {
+      cadastro.id = userCredential.user.uid
       this.firebase.collection('users')
         .doc(userCredential.user.uid)
         .set({

@@ -23,6 +23,7 @@ export class CadastroPage implements OnInit {
 
   constructor( public firebaseService: FirebaseService, public fb: FormBuilder, public router: Router) { 
     this.formulario = fb.group({
+      id: [null],
       nome: ['', Validators.compose([Validators.required, Validators.minLength(5)])],
       email: ['',Validators.compose([Validators.required, Validators.email])],
       senha: ['', Validators.compose([Validators.required, Validators.minLength(6)])],

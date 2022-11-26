@@ -37,6 +37,7 @@ public logout() {
 
 public cadastrarUser(cadastro) {
 return this.auth.createUserWithEmailAndPassword(cadastro.email, cadastro.senha).then((userCredential)  => {
+  cadastro.id = userCredential.user.uid;
   this.firebase.collection('users')
     .doc(userCredential.user.uid)
     .set({
