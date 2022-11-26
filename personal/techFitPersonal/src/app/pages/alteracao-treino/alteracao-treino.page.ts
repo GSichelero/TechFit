@@ -57,19 +57,19 @@ export class AlteracaoTreinoPage implements OnInit {
   }
 
   public adicionaExercicio(Exercicio){
-    this.abrirModal();
-    //this.exerciciosFiltrados.push({nome: Exercicio.nome, diaSemana: 0});
+    this.abrirModal(Exercicio);
   }
 
   public retiraExercicio(index){
     this.exerciciosFiltrados.splice(index,1);
   }
 
-  private async abrirModal(){
+  private async abrirModal(Exercicio){
     let modal = await this.modalController.create({
       component: AjusteExerciciosModalComponent,
       initialBreakpoint : 0.25,
-      breakpoints: [0,0.25,0.75]
+      breakpoints: [0,0.25,0.75],
+      componentProps:{"exercico": Exercicio} 
     });
     await modal.present();
 
