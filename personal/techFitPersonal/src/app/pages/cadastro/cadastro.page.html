@@ -36,11 +36,12 @@
     
     </div>
 
-      <div >
-        <!-- <ion-item>
-          <ion-label>Foto</ion-label>
-          <ion-input type="file" formControlName="foto" #foto></ion-input>
-        </ion-item> -->
+      <div *ngIf="segundoCadastro">
+        <ion-item>
+          <img [src]='imgUrl'>
+
+          <input type="file" name="files[]" (change)="processaArquivo($event)" />
+        </ion-item>
   
         <ion-item>
           <ion-label position="floating">Especialização</ion-label>

@@ -38,8 +38,11 @@
     
     <div *ngIf="segundoCadastro">
 
-      
+      <ion-item>
+        <img [src]='imgUrl'>
 
+        <input type="file" name="files[]" (change)="processaArquivo($event)" />
+      </ion-item>
 
       <ion-item>
         <ion-label position="stacked">Idade</ion-label>

@@ -1,12 +1,19 @@
+
 <ion-split-pane content-id="menu">
     <ion-menu content-id="menu" type="push">
-        <ion-list id="menu-list">
-            <ion-item *ngFor="let page of Pages" >
-                <ion-button (click)="nextpage(page.url)" expand="block" fill="clear" color="dark" shape="round" auto-hide="false">
-                    {{ page.title }}
-                </ion-button>
-            </ion-item>
-        </ion-list>
+
+        <ion-content *ngIf="user" class="item">
+            <ion-avatar>
+                    <ion-img [src]="user.cadastro.avatar" class="avatar-img"></ion-img>
+            </ion-avatar> 
+            <ion-list id="menu-list">
+                <ion-item *ngFor="let page of Pages" >
+                    <ion-button (click)="nextpage(page.url)" expand="block" fill="clear" color="dark" shape="round" auto-hide="false">
+                        {{ page.title }}
+                    </ion-button>
+                </ion-item>
+            </ion-list>
+        </ion-content>
     </ion-menu>
     <ion-router-outlet id="menu"></ion-router-outlet>
 </ion-split-pane>

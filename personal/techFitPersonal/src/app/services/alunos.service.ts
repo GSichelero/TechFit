@@ -2,7 +2,6 @@ import { Injectable } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { BehaviorSubject } from 'rxjs';
-import {map} from "rxjs/operators";
 
 
 @Injectable({
@@ -26,15 +25,20 @@ export class AlunosService {
 
   }
 
-  private async getUsuarioLogado(id) {
+  public getUsuarioAutenticado() {
+    this.usuarioSubject = new BehaviorSubject<any>(this.usuario);
+    return this.usuarioSubject
+  }
+
+  public async getUsuarioLogado(id) {
     const docRef = await this.firebase
       .collection('users')
       .doc(id)
       .get().toPromise();
 
-    this.usuario = {id, ...docRef.data() as any};
-    //this.usuarioSubject.next(this.usuario);
-    console.log(this.usuario);
+      this.usuario = {id, ...docRef.data() as any};
+      this.usuarioSubject.next(this.usuario);
+      console.log(this.usuario);
   }
 
   // pega todos os usuarios do tipo personal

@@ -2,6 +2,8 @@ import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { FirebaseService } from '../services/firebase.service';
 import { PersonalService } from '../services/personal.service';
+import { filter } from 'rxjs/operators';
+
 
 @Component({
   selector: 'app-home',
@@ -10,9 +12,15 @@ import { PersonalService } from '../services/personal.service';
 })
 export class HomePage {
 
+  public user;
+  
   constructor( public firebaseService: FirebaseService
     , public PersonalService: PersonalService
     , public router: Router ) {
+
+    this.PersonalService.getUsuarioAutenticado().pipe(filter(usuario => usuario != undefined)).subscribe(usuario => {
+      this.user = usuario;
+    })
 
     this.PersonalService.getAllPersonal();
   }

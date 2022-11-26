@@ -8,13 +8,17 @@ import { CadastroPageRoutingModule } from './cadastro-routing.module';
 
 import { CadastroPage } from './cadastro.page';
 
+import { AngularFireStorageModule } from '@angular/fire/compat/storage';
+
+
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     ReactiveFormsModule,
     IonicModule,
-    CadastroPageRoutingModule
+    CadastroPageRoutingModule,
+    AngularFireStorageModule
   ],
   declarations: [CadastroPage]
 })

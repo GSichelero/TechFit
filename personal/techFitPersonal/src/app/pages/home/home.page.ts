@@ -19,7 +19,6 @@ export class HomePage {
 
   ngOnInit() {
     // this.firebaseService.getUsuarioAutenticado().subscribe(usuario => {
-    //   debugger
     //   console.log(usuario);
     //   this.usuario = usuario;
     //   if(usuario == null) {
@@ -28,6 +27,10 @@ export class HomePage {
     // });
   }
 
+  public logout(){
+    this.firebaseService.logout();
+    this.router.navigate(['login']);
+  }
 
   public teste() {
     this.alunosService.getAlunosVinculados();
