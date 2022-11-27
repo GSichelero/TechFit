@@ -15,7 +15,7 @@ const routes: Routes = [
   },
   {
     path: 'login/cadastro',
-    loadChildren: () => import('./cadastro/cadastro.module').then( m => m.CadastroPageModule)
+    loadChildren: () => import('./pages/cadastro/cadastro.module').then( m => m.CadastroPageModule)
   },
   {
     path: 'login',
@@ -24,7 +24,8 @@ const routes: Routes = [
   {
     path: 'auto-avaliacao',
     loadChildren: () => import('./auto-avaliacao/auto-avaliacao.module').then( m => m.AutoAvaliacaoPageModule)
-  },  {
+  },
+  {
     path: 'add-post',
     loadChildren: () => import('./add-post/add-post.module').then( m => m.AddPostPageModule)
   },
