@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FirebaseService } from '../services/firebase.service';
+import { FirebaseService } from '../../services/firebase.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AngularFireStorage, AngularFireUploadTask } from '@angular/fire/compat/storage';
@@ -46,10 +46,11 @@ export class CadastroPage implements OnInit {
 
 
   async cadastrar() {
-    this.formulario.value.avatar = this.imgUrl;
+    this.imgUrl ? this.formulario.value.avatar = this.imgUrl : this.formulario.value.avatar;
     await this.firebaseService.cadastrarUser(this.formulario.value).then(() =>
         this.router.navigateByUrl('/home')
     );
+    this.segundoCadastro = false;
   }
 
   public verificaCadastro(evento) {

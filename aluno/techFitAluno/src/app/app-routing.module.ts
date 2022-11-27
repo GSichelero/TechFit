@@ -32,6 +32,10 @@ const routes: Routes = [
     path: 'edit-post',
     loadChildren: () => import('./edit-post/edit-post.module').then( m => m.EditPostPageModule)
   },
+  {
+    path: 'listagem-personal',
+    loadChildren: () => import('./pages/listagem-personal/listagem-personal.module').then( m => m.ListagemPersonalPageModule)
+  },
 
 
 

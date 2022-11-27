@@ -16,6 +16,7 @@ export class AlunosService {
 
     this.auth.authState.subscribe( user => {
       if (user) {
+        console.log(1)
         this.getUsuarioLogado(user.uid);
       } else {
         this.usuario = null;
@@ -25,6 +26,7 @@ export class AlunosService {
   }
 
   public getUsuarioAutenticado() {
+    console.log(2)
     this.usuarioSubject = new BehaviorSubject<any>(this.usuario);
     return this.usuarioSubject
   }

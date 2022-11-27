@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
 import {AngularFireAuth} from "@angular/fire/compat/auth";
 import { BehaviorSubject } from 'rxjs';
+import { Router } from '@angular/router';
 
 @Injectable({
   providedIn: 'root'
@@ -13,7 +14,9 @@ export class FirebaseService {
 
   public userData: any;
   
-  constructor( private firebase: AngularFirestore, public auth: AngularFireAuth ) { 
+  constructor( private firebase: AngularFirestore
+    , public auth: AngularFireAuth
+    , public router: Router ) { 
 
     this.auth.authState.subscribe( user => {
       if (user) {
@@ -34,7 +37,7 @@ export class FirebaseService {
     }
 
     public logout() {
-      return this.auth.signOut();
+      return this.auth.signOut().then(()=> this.router.navigate(['login']));
     }
 
     public cadastrarUser(cadastro) {

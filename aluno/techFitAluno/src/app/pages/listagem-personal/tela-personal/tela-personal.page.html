@@ -1,0 +1,79 @@
+
+<ion-item>
+  <ion-icon routerLink="/listagem-personal" name="arrow-back" size="large"></ion-icon>
+</ion-item>
+
+<ion-content >
+
+  <div *ngIf="selectedPeronal" >
+
+    <div class="center">
+      <div>
+        <ion-card class="center hide-card">
+          <ion-avatar style="height: 130px;width: 130px;">
+            <img [src]='selectedPeronal.cadastro.avatar ? selectedPeronal.cadastro.avatar : "https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png"' alt="Silhouette of a person's head" />
+          </ion-avatar>
+          <ion-card-header>
+            <ion-card-title>{{selectedPeronal.cadastro.nome}}</ion-card-title>
+          </ion-card-header>
+          <ion-card-content>
+            {{selectedPeronal.cadastro.especializacao}}
+            <p>{{selectedPeronal.cadastro.idade}} - {{selectedPeronal.cadastro.regiao}}</p>
+          </ion-card-content>
+        </ion-card>
+      </div>
+
+      <ion-button id="open-modal" expand="block">Contratar</ion-button>
+
+      <ion-card>
+        <ion-card-header>
+          <ion-card-title>Descrição</ion-card-title>
+        </ion-card-header>
+      
+        <ion-card-content>
+          {{selectedPeronal.cadastro.descricao}}
+        </ion-card-content>
+      </ion-card>
+
+      <ion-modal #modal trigger="open-modal" [canDismiss]="canDismiss" [presentingElement]="presentingElement">
+        <ng-template>
+          <ion-header>
+            <ion-toolbar>
+              <ion-title>Modal</ion-title>
+              <ion-buttons slot="end">
+                <ion-button (click)="modal.dismiss()">Close</ion-button>
+              </ion-buttons>
+            </ion-toolbar>
+          </ion-header>
+          <ion-content>
+
+            <ion-list>
+              <ion-item>
+                <ion-label position="floating">Tempo de treino diario</ion-label>
+                <ion-input type="time" #tempo></ion-input>
+              </ion-item>
+              <ion-item>
+                <ion-select #dias placeholder="Dias da semana" [multiple]="true">
+                  <ion-select-option *ngFor="let dia of week">{{dia}}</ion-select-option>
+                </ion-select>
+              </ion-item>
+              <ion-item>
+                <ion-select #equipamento placeholder="Equipamentos diaponiveis" [multiple]="true">
+                  <ion-select-option *ngFor="let equipamento of equipamentos">{{equipamento}}</ion-select-option>
+                </ion-select>
+              </ion-item>
+              <ion-item>
+                <ion-label>Observações</ion-label>
+                <ion-textarea #obs cols="30" rows="10"></ion-textarea>
+              </ion-item>
+              <ion-item>
+              <ion-button (click)="pedidoTreino(tempo.value, dias.value, equipamento.value, obs.value)">Enviar</ion-button>
+              </ion-item>
+            </ion-list>
+          </ion-content>
+
+        </ng-template>
+      </ion-modal>
+    </div>
+  </div>
+</ion-content>
