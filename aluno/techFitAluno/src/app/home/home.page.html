@@ -1,24 +1,16 @@
-<ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">Blank</ion-title>
-    </ion-toolbar>
-  </ion-header>
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Home</ion-title>
+    <ion-buttons slot="start">
+      <ion-menu-button menu="main-menu"></ion-menu-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
 
+<ion-content>
   <div id="container">
     <ion-button (click)="teste()">all</ion-button>
     <ion-button (click)="teste2()">by id</ion-button>
     <ion-button (click)="logOut()">click</ion-button>
   </div>
-
-  <div class="hide-card">
-    <ion-header>
-      <ion-menu-toggle>
-        <ion-icon name="menu" size="large"></ion-icon>
-      <!-- <ion-button>Click to open the menu</ion-button> -->
-      </ion-menu-toggle>
-    </ion-header>
-  </div>
-
-  <app-menu></app-menu>
 </ion-content>

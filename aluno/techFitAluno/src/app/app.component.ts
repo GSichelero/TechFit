@@ -6,6 +6,8 @@ import { Component } from '@angular/core';
   styleUrls: ['app.component.scss'],
 })
 export class AppComponent {
-  isMostarMenu: boolean = true;
+  accountProvider: any;
+  /*isMostarMenu: boolean = true;*/
   constructor() {}
+
 }
