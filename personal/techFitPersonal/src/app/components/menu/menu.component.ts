@@ -17,7 +17,7 @@ export class MenuComponent implements OnInit {
     { title: 'Home', url: '/home' },
     { title: 'Listagem Semanas', url: '/listagem/semanas' },
     { title: 'Alteração Treino', url: '/alteracao/treino'},
-    { title: 'Administracao', url: '/administrativo'}
+    { title: 'Pedidos', url: '/pedidos'}
   ];
   constructor( private route: Router
     , private alunosService: AlunosService
@@ -26,9 +26,6 @@ export class MenuComponent implements OnInit {
 
     this.alunosService.getUsuarioAutenticado().pipe(filter(usuario => usuario != undefined)).subscribe(usuario => {
       this.user = usuario;
-      if(this.user.cadastro.tipo !== 'ADM'){
-        this.Pages.splice(3); 
-      }
     })
   }
   nextpage(url) {
