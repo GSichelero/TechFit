@@ -22,7 +22,6 @@ export class AlunosService {
         this.usuarioSubject. next(null);
       }
     })
-
   }
 
   public getUsuarioAutenticado() {
@@ -44,25 +43,23 @@ export class AlunosService {
   // pega todos os usuarios do tipo personal
   public getAlunosVinculados() {
     return new Promise<any>((resolve)=> {
-       this.firebase.collection('users')
-          .doc(this.usuario.id)
-          .collection('alunos')
-          .valueChanges().subscribe(users => {
-          resolve(users);
-          console.log(users);
-        })
+      this.firebase.collection('users')
+        .doc(this.usuario.id)
+        .collection('alunos')
+        .valueChanges().subscribe(users => {
+        resolve(users);
+        console.log(users);
       })
-        // .valueChanges();
-
+    })
   }
 
-  public getPersonalById(id) {
+  public getById(id) {
     return new Promise<any>((resolve)=> {
       this.firebase.collection('users', ref => ref.where('cadastro.id','==',id))
         .valueChanges().subscribe(users => {
           resolve(users);
-        })
       })
+    })
   }
 
 }

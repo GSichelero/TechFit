@@ -1,19 +1,36 @@
 
 <ion-split-pane content-id="menu">
     <ion-menu content-id="menu" type="push">
-
         <ion-content *ngIf="user" class="item">
-            <ion-avatar>
-                    <ion-img [src]="user.cadastro.avatar" class="avatar-img"></ion-img>
-            </ion-avatar> 
+
+            <div style="display: flex; align-items: center; justify-content: center;">
+            <ion-card text-center class="hide-card">
+                <ion-avatar>
+                    <ion-img [src]='user.cadastro.avatar ? user.cadastro.avatar : "https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png"' class="avatar-img"></ion-img>
+                </ion-avatar> 
+                <ion-card-content>
+
+                    <ion-card-title>{{user.cadastro.nome}}</ion-card-title>
+                    <ion-card-subtitle>{{user.cadastro.especializacao}}</ion-card-subtitle>
+
+                </ion-card-content>
+            </ion-card>
+              </div>            
             <ion-list id="menu-list">
                 <ion-item *ngFor="let page of Pages" >
+                    
                     <ion-button (click)="nextpage(page.url)" expand="block" fill="clear" color="dark" shape="round" auto-hide="false">
                         {{ page.title }}
                     </ion-button>
                 </ion-item>
             </ion-list>
         </ion-content>
+        <ion-footer>
+            <ion-button fill="solid" (click)="logout()">
+                Log Out
+                <ion-icon name="log-out-outline"></ion-icon>
+            </ion-button>
+        </ion-footer>
     </ion-menu>
     <ion-router-outlet id="menu"></ion-router-outlet>
 </ion-split-pane>

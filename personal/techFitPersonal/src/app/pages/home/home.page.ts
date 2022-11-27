@@ -27,21 +27,8 @@ export class HomePage {
     // });
   }
 
-  public logout(){
-    this.firebaseService.logout();
-    this.router.navigate(['login']);
-  }
-
   public teste() {
     this.alunosService.getAlunosVinculados();
   }
-
-  public teste2() {
-    
-  }
-
-
-
-
 
 }

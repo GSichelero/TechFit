@@ -1,5 +1,7 @@
 import { FirebaseService } from 'src/app/services/firebase.service';
 import { Component } from '@angular/core';
+import { AlunosService } from './services/alunos.service';
+import { Router } from '@angular/router';
 @Component({
   selector: 'app-root',
   templateUrl: 'app.component.html',
@@ -7,10 +9,20 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
 
-  isMostarMenu: boolean = true;
+  isMostarMenu: boolean = false;
 
-  constructor(private firebase: FirebaseService) {
-    //this.isMostarMenu = firebase.isUsuarioLogado();
-
+  constructor(private firebase: AlunosService, public router:Router) {
+    this.firebase.getUsuarioAutenticado().subscribe((usuario) =>{
+      if(usuario == null || usuario == undefined) {
+        this.isMostarMenu = false;
+      } else {
+        this.isMostarMenu = true;
+      }
+    });
   }
+
+  // public changeMenu(event){
+  //   this.isMostarMenu = false;
+  //   this.router.navigate(['login'])
+  // }
 }

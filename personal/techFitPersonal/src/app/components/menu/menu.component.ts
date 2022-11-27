@@ -1,7 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { Router } from '@angular/router';
 import { filter } from 'rxjs/operators';
 import { AlunosService } from 'src/app/services/alunos.service';
+import { FirebaseService } from 'src/app/services/firebase.service';
 
 @Component({
   selector: 'my-menu',
@@ -15,12 +16,19 @@ export class MenuComponent implements OnInit {
   Pages = [
     { title: 'Home', url: '/home' },
     { title: 'Listagem Semanas', url: '/listagem/semanas' },
-    { title: 'Alteração Treino', url: '/alteracao/treino'}
+    { title: 'Alteração Treino', url: '/alteracao/treino'},
+    { title: 'Administracao', url: '/administrativo'}
   ];
-  constructor(private route: Router, private alunosService: AlunosService) { 
+  constructor( private route: Router
+    , private alunosService: AlunosService
+    , public firebaseService: FirebaseService
+    , public router: Router ) { 
 
     this.alunosService.getUsuarioAutenticado().pipe(filter(usuario => usuario != undefined)).subscribe(usuario => {
       this.user = usuario;
+      if(this.user.cadastro.tipo !== 'ADM'){
+        this.Pages.splice(3); 
+      }
     })
   }
   nextpage(url) {
@@ -28,7 +36,10 @@ export class MenuComponent implements OnInit {
   }
 
   ngOnInit() {
-    const value = localStorage.getItem('user');
+  }
+
+  public logout(){
+    this.firebaseService.logout();
   }
 
 }
