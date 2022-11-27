@@ -36,29 +36,41 @@
     
     </div>
 
-      <div *ngIf="segundoCadastro">
-        <ion-item>
-          <img [src]='imgUrl'>
+    <div *ngIf="segundoCadastro">        
+      <div style="height:100px">
+        <ion-avatar>
+          <ion-img  class="avatar-img" [src]='imgUrl ? imgUrl : "https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png"'></ion-img>
+        </ion-avatar> 
+        <label for="files">
+          <ion-icon name="camera" size="large"></ion-icon>
+          <input type="file" id="files" name="files[]" (change)="processaArquivo($event)" style="display:none" />
+        </label>
+      </div>          
 
-          <input type="file" name="files[]" (change)="processaArquivo($event)" />
-        </ion-item>
-  
-        <ion-item>
-          <ion-label position="floating">Especialização</ion-label>
+      <ion-item>
+        <ion-label position="floating">Especialização</ion-label>
 
-          <ion-select formControlName="especializacao">
-            <ion-select-option *ngFor="let especializacao of especializacoes">{{especializacao}}</ion-select-option>
-          </ion-select>
+        <ion-select formControlName="especializacao">
+          <ion-select-option *ngFor="let especializacao of especializacoes">{{especializacao}}</ion-select-option>
+        </ion-select>
+        <ion-note *ngIf="formulario.controls.especializacao.touched" slot="error">
+          <span *ngIf="formulario.controls.especializacao.errors?.['required']"><ion-icon name="alert-outline"></ion-icon> Especialização é obrigatória</span>
+        </ion-note>
+      </ion-item>
 
-        </ion-item>
-  
         <ion-item>
           <ion-label position="floating">Idade</ion-label>
           <ion-input type="number"  formControlName="idade" #idade></ion-input>
+          <ion-note *ngIf="formulario.controls.idade.touched" slot="error">
+            <span *ngIf="formulario.controls.idade.errors?.['required']"><ion-icon name="alert-outline"></ion-icon> Idade é obrigatória</span>
+          </ion-note>
         </ion-item>
         <ion-item>
           <ion-label position="floating">Região</ion-label>
           <ion-input type="text"  formControlName="regiao"></ion-input>
+          <ion-note *ngIf="formulario.controls.regiao.touched" slot="error">
+            <span *ngIf="formulario.controls.regiao.errors?.['required']"><ion-icon name="alert-outline"></ion-icon> Região é obrigatória</span>
+          </ion-note>
         </ion-item>
         <ion-item>
           <ion-label>Descrição</ion-label>

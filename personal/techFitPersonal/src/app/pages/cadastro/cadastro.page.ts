@@ -4,6 +4,7 @@ import { AngularFireStorage, AngularFireUploadTask } from '@angular/fire/compat/
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { FirebaseService } from 'src/app/services/firebase.service';
+import { AlertController } from '@ionic/angular';
 
 
 @Component({
@@ -23,21 +24,21 @@ export class CadastroPage implements OnInit {
   public especializacoes = [
     'musculação','Dança','Corrida', 'Triaton','Fitness',
     'Artes marciais','Reabilitação musculoesqueletica', 'Esportes coletivos', 'Pilates', 'Yoga', 'Treinamento funcional'
-
   ]
 
   constructor( public firebaseService: FirebaseService
     , public fb: FormBuilder
     , public router: Router
     , private afs:AngularFireStorage
-    , private af: AngularFirestore) { 
+    , private af: AngularFirestore
+    , public alertController: AlertController) { 
     this.formulario = fb.group({
       id: [null],
       nome: ['', Validators.compose([Validators.required, Validators.minLength(5)])],
       email: ['',Validators.compose([Validators.required, Validators.email])],
       senha: ['', Validators.compose([Validators.required, Validators.minLength(6)])],
       senhaConf: ['', Validators.compose([Validators.required, Validators.minLength(6)])],
-      avatar: [null],
+      avatar: [''],
       especializacao: ['',Validators.required],
       idade: ['',Validators.required],
       regiao: ['',Validators.required],
@@ -50,11 +51,12 @@ export class CadastroPage implements OnInit {
   }
 
   async cadastrar() {
-    debugger
-    this.formulario.value.avatar = this.imgUrl;
-    await this.firebaseService.cadastrarUser(this.formulario.value).then(() =>
-        this.router.navigateByUrl('/home')
-    );
+    this.imgUrl ? this.formulario.value.avatar = this.imgUrl : this.formulario.value.avatar;
+    await this.firebaseService.cadastrarUser(this.formulario.value).then((ret) =>{
+        this.router.navigateByUrl('/login')
+    });
+    this.segundoCadastro = false;
+    this.presentAlert();
   }
 
   public verificaCadastro(evento) {
@@ -78,12 +80,21 @@ export class CadastroPage implements OnInit {
       console.log(url); 
     });
 
-    // const file = evento.target.files[0];
-    // const ref = this.afs.ref('avatar/' + this.af.createId());
-    // ref.put(file);
+  }
 
-    // this.formulario.value.avatar = ref.getDownloadURL();
-    // console.log(this.formulario.value.avatar)
+  async presentAlert() {
+    debugger
+    const alert = await this.alertController.create({
+      header: 'O seu perfil esta sendo analisado pelos nosso administradores. Aguarde confirmação!',
+      buttons: [
+        {
+          text: 'OK',
+          role: 'confirm',
+        },
+      ],
+    });
+
+    await alert.present();
   }
 
 
