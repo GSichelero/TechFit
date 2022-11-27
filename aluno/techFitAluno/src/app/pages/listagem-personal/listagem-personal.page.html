@@ -1,0 +1,29 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>listagem-personal</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+
+  <ion-list>
+    <ion-list>
+
+      <ion-item button style="width: 100%;" *ngFor="let personal of personais" 
+      [id]="personal.cadastro.id" (click)="navega(personal)">
+        <ion-avatar slot="end"  style="height: 70px; width: 70px;">
+          <ion-img [src]="personal.cadastro.avatar" class="avatar-img"></ion-img>
+        </ion-avatar> 
+
+          
+          <ion-label>
+            <h2>{{personal.cadastro.nome}}</h2>
+            <p>{{personal.cadastro.especializacao}}</p>
+          </ion-label>
+ 
+      </ion-item>
+
+  </ion-list>
+</ion-list>
+
+</ion-content>

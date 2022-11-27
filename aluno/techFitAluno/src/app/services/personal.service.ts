@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { BehaviorSubject } from 'rxjs';
+import {map} from "rxjs/operators";
 
 
 @Injectable({
@@ -17,6 +18,7 @@ export class PersonalService {
 
     this.auth.authState.subscribe( user => {
       if (user) {
+
         this.getUsuarioLogado(user.uid);
       } else {
         this.usuario = null;
@@ -51,13 +53,21 @@ export class PersonalService {
       })
   }
 
-  public getPersonalById(id) {
-    return new Promise<any>((resolve)=> {
-      this.firebase.collection('users', ref => ref.where('cadastro.id','==',id))
-        .valueChanges().subscribe(users => {
-          resolve(users);
-        })
-      })
+  // public getPersonalById(id) {
+  //   return new Promise<any>((resolve)=> {
+  //     this.firebase.collection('users', ref => ref.where('cadastro.id','==',id))
+  //       .valueChanges().subscribe(users => {
+  //         resolve(users);
+  //       })
+  //     })
+  // }
+
+  public async getPersonalById(id) {
+      return await this.firebase
+        .collection('users')
+        .doc(id)
+        .get().toPromise();
+    // .valueChanges();
   }
 
 }

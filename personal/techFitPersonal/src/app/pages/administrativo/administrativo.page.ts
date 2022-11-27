@@ -19,10 +19,7 @@ export class AdministrativoPage implements OnInit {
   }
 
   public async getPersonalNA() {
-    debugger
     this.personais = await this.admService.getAllPersonal()
-    debugger
-    console.log(this.personais);
   }
 
   public confirmaCad(personal) {

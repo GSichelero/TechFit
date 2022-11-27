@@ -19,7 +19,6 @@ export class HomePage {
 
   ngOnInit() {
     // this.firebaseService.getUsuarioAutenticado().subscribe(usuario => {
-    //   console.log(usuario);
     //   this.usuario = usuario;
     //   if(usuario == null) {
     //     this.router.navigateByUrl('login')

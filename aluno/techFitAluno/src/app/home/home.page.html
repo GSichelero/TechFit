@@ -1,11 +1,3 @@
-<ion-header [translucent]="true">
-  <ion-toolbar>
-    <ion-title>
-      Blank
-    </ion-title>
-  </ion-toolbar>
-</ion-header>
-
 <ion-content [fullscreen]="true">
   <ion-header collapse="condense">
     <ion-toolbar>
@@ -18,4 +10,15 @@
     <ion-button (click)="teste2()">by id</ion-button>
     <ion-button (click)="logOut()">click</ion-button>
   </div>
+
+  <div class="hide-card">
+    <ion-header>
+      <ion-menu-toggle>
+        <ion-icon name="menu" size="large"></ion-icon>
+      <!-- <ion-button>Click to open the menu</ion-button> -->
+      </ion-menu-toggle>
+    </ion-header>
+  </div>
+
+  <app-menu></app-menu>
 </ion-content>

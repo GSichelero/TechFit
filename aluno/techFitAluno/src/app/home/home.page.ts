@@ -27,13 +27,9 @@ export class HomePage {
 
   public async teste(){
     const personas = await this.PersonalService.getAllPersonal();
-    console.log(personas);
-
   }
   public async teste2(){
     const personas = await this.PersonalService.getPersonalById('SHgHs5uquUUpETseMksscf7sGcL2');
-    console.log(personas);
-
   }
 
   public logOut(){

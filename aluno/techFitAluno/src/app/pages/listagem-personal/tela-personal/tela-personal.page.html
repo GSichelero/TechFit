@@ -1,0 +1,41 @@
+
+<ion-content >
+
+  <div *ngIf="selectedPeronal" >
+
+    <div class="center">
+      <div>
+        <ion-card class="center hide-card">
+          <ion-avatar style="height: 150px;width: 150px;">
+            <img [src]='selectedPeronal.cadastro.avatar ? selectedPeronal.cadastro.avatar : "https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png"' alt="Silhouette of a person's head" />
+          </ion-avatar>
+          <ion-card-header>
+            <ion-card-title>{{selectedPeronal.cadastro.nome}}</ion-card-title>
+          </ion-card-header>
+          <ion-card-content>
+            {{selectedPeronal.cadastro.especializacao}}
+            <p>{{selectedPeronal.cadastro.idade}} - {{selectedPeronal.cadastro.regiao}}</p>
+          </ion-card-content>
+        </ion-card>
+      </div>
+
+      <ion-button>Contratar</ion-button>
+
+      <ion-card>
+        <ion-card-header>
+          <ion-card-title>Descrição</ion-card-title>
+        </ion-card-header>
+      
+        <ion-card-content>
+          {{selectedPeronal.cadastro.descricao}}
+        </ion-card-content>
+      </ion-card>
+
+    </div>
+
+
+
+
+  </div>
+
+</ion-content>

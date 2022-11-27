@@ -38,11 +38,20 @@
     
     <div *ngIf="segundoCadastro">
 
-      <ion-item>
+      <!-- <ion-item>
         <img [src]='imgUrl'>
 
         <input type="file" name="files[]" (change)="processaArquivo($event)" />
-      </ion-item>
+      </ion-item> -->
+      <div style="height:100px">
+        <ion-avatar>
+          <ion-img  class="avatar-img" [src]='imgUrl ? imgUrl : "https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png"'></ion-img>
+        </ion-avatar> 
+        <label for="files">
+          <ion-icon name="camera" size="large"></ion-icon>
+          <input type="file" id="files" name="files[]" (change)="processaArquivo($event)" style="display:none" />
+        </label>
+      </div>  
 
       <ion-item>
         <ion-label position="stacked">Idade</ion-label>

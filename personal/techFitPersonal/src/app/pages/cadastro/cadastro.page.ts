@@ -83,7 +83,6 @@ export class CadastroPage implements OnInit {
   }
 
   async presentAlert() {
-    debugger
     const alert = await this.alertController.create({
       header: 'O seu perfil esta sendo analisado pelos nosso administradores. Aguarde confirmação!',
       buttons: [
