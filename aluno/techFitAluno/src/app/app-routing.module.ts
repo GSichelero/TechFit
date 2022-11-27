@@ -20,7 +20,11 @@ const routes: Routes = [
   {
     path: 'login',
     loadChildren: () => import('./login/login.module').then( m => m.LoginPageModule)
+  },  {
+    path: 'auto-avaliacao',
+    loadChildren: () => import('./auto-avaliacao/auto-avaliacao.module').then( m => m.AutoAvaliacaoPageModule)
   },
+
 
 
 ];
