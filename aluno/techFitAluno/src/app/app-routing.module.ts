@@ -20,10 +20,19 @@ const routes: Routes = [
   {
     path: 'login',
     loadChildren: () => import('./login/login.module').then( m => m.LoginPageModule)
-  },  {
+  },
+  {
     path: 'auto-avaliacao',
     loadChildren: () => import('./auto-avaliacao/auto-avaliacao.module').then( m => m.AutoAvaliacaoPageModule)
+  },  {
+    path: 'add-post',
+    loadChildren: () => import('./add-post/add-post.module').then( m => m.AddPostPageModule)
   },
+  {
+    path: 'edit-post',
+    loadChildren: () => import('./edit-post/edit-post.module').then( m => m.EditPostPageModule)
+  },
+
 
 
 

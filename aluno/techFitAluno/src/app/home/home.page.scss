@@ -1,4 +1,31 @@
-#container {
+* {
+  margin: 0;
+  padding: 0;
+}
+
+ ion-toolbar {
+  --background: #19a49c;
+ }
+
+ ion-grid {
+
+  ion-row {
+    background-color: #19a49c;
+    height: 200px;
+    text-align: center;
+    font-weight: bold;
+   }
+
+  ion-row h1 {
+    font-size: 30px;
+  }
+
+  ion-col {
+    padding-top: 20px;
+  }
+ }
+
+ #container {
   text-align: center;
 
   position: absolute;
