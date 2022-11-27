@@ -21,8 +21,4 @@ export class AppComponent {
     });
   }
 
-  // public changeMenu(event){
-  //   this.isMostarMenu = false;
-  //   this.router.navigate(['login'])
-  // }
 }

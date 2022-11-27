@@ -1,0 +1,39 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>pedidos</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+
+<ion-content *ngIf="pedidos">
+
+    <ion-list>
+      <ion-item button style="width: 100%;" *ngFor="let pedido of pedidos">
+        <ion-avatar slot="end"  style="height: 70px; width: 70px;">
+          <ion-img [src]="pedido.treino.avatar"class="avatar-img"></ion-img>
+        </ion-avatar> 
+          <ion-label>
+            <h2>{{pedido.treino.nome}}</h2>
+          </ion-label>
+          <ion-label>
+            <h2>{{pedido.treino.tempo}}</h2>
+          </ion-label>
+          <ion-label>
+            <h2>{{pedido.treino.idade}}</h2>
+          </ion-label>
+          <ion-label>
+            <h2>{{pedido.treino.obs}}</h2>
+          </ion-label>
+          <ion-label>
+            <h2>{{pedido.treino.dias}}</h2>
+          </ion-label>
+          <ion-label>
+            <h2>{{pedido.treino.equips}}</h2>
+          </ion-label>
+          <ion-button (click)="aceitarPedido(pedido)">Aceitar</ion-button>
+          <ion-button (click)="negarPedido(pedido)">Negar</ion-button>
+      </ion-item>
+
+  </ion-list>
+
+</ion-content>

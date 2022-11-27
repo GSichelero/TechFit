@@ -9,14 +9,12 @@ export class TreinosService {
   constructor(private firebase:AngularFirestore) { }
 
 
-  public adicionarNota(id, usuario, treino) {
-    debugger
+  public adicionarPedido(id,treino) {
     return this.firebase
       .collection('users')
       .doc(id)
       .collection('pedidos')
       .add({
-        usuario,
         treino
       })
   }

@@ -18,7 +18,6 @@ export class PersonalService {
 
     this.auth.authState.subscribe( user => {
       if (user) {
-
         this.getUsuarioLogado(user.uid);
       } else {
         this.usuario = null;

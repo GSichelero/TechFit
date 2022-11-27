@@ -24,7 +24,8 @@ const routes: Routes = [
   {
     path: 'auto-avaliacao',
     loadChildren: () => import('./auto-avaliacao/auto-avaliacao.module').then( m => m.AutoAvaliacaoPageModule)
-  },  {
+  },
+  {
     path: 'add-post',
     loadChildren: () => import('./add-post/add-post.module').then( m => m.AddPostPageModule)
   },

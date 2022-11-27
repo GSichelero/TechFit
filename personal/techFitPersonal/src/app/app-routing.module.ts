@@ -29,12 +29,11 @@ const routes: Routes = [
     path: 'alteracao/treino',
     loadChildren: () => import('./pages/alteracao-treino/alteracao-treino.module').then( m => m.AlteracaoTreinoPageModule),
     canActivate: [AuthGuard]
-  },
-  {
-    path: 'administrativo',
-    loadChildren: () => import('./pages/administrativo/administrativo.module').then( m => m.AdministrativoPageModule),
-    canActivate: [AuthGuard]
-  },
+  },  {
+    path: 'pedidos',
+    loadChildren: () => import('./pages/pedidos/pedidos.module').then( m => m.PedidosPageModule)
+  }
+
 
 
 ];

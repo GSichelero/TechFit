@@ -1,7 +1,9 @@
 import { Injectable } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
+import { resolve } from 'dns';
 import { BehaviorSubject } from 'rxjs';
+import { map } from 'rxjs/operators';
 
 
 @Injectable({
@@ -11,12 +13,12 @@ export class AlunosService {
 
   private usuario;
   private usuarioSubject: BehaviorSubject<any|null>;
+  public userData: any;
 
   constructor( private firebase:AngularFirestore, public auth: AngularFireAuth  ) { 
 
     this.auth.authState.subscribe( user => {
       if (user) {
-        console.log(1)
         this.getUsuarioLogado(user.uid);
       } else {
         this.usuario = null;
@@ -26,7 +28,6 @@ export class AlunosService {
   }
 
   public getUsuarioAutenticado() {
-    console.log(2)
     this.usuarioSubject = new BehaviorSubject<any>(this.usuario);
     return this.usuarioSubject
   }
@@ -62,6 +63,39 @@ export class AlunosService {
           resolve(users);
       })
     })
+  }
+
+
+  public getAllPedidos(id) {
+    return this.firebase.collection('users')
+      .doc(id)
+      .collection('pedidos')
+      .snapshotChanges()
+      .pipe(map(actions => actions.map(a => {
+        const id = a.payload.doc.id;
+        const dado:any = a.payload.doc.data();
+        return {id,...dado};
+      })));
+  }
+
+  public vincularAluno(id, pedido){
+    return this.firebase
+    .collection('users')
+    .doc(id)
+    .collection('alunos')
+    .add({
+      pedido
+    })
+  }
+
+  public descartarPedido(id, pedido){
+    debugger
+    return this.firebase
+      .collection('users')
+      .doc(id)
+      .collection('pedidos')
+      .doc(pedido.id)
+      .delete();
   }
 
 }

@@ -39,14 +39,13 @@ export class TelaPersonalPage implements OnInit {
   }
 
   public pedidoTreino(tempo, dias, equips, obs){
-    const treino = {tempo: tempo, dias: dias, equips: equips, obs: obs  }
-
+    //const treino = {tempo: tempo, dias: dias, equips: equips, obs: obs  }
     const user = this.personalService.getUsuarioAutenticado().value
-          this.usuario = {id: user.cadastro.id, nome: user.cadastro.nome
-                      , idade: user.cadastro.idade, peso: user.cadastro.peso
-                      , altura: user.cadastro.altura}
-    debugger
-    this.treinosService.adicionarNota(this.selectedPeronal.cadastro.id, this.usuario, treino).then((event) => {
+    const treino = {id: user.cadastro.id, nome: user.cadastro.nome
+                , idade: user.cadastro.idade, peso: user.cadastro.peso
+                , altura: user.cadastro.altura, avatar: user.cadastro.avatar
+                , tempo: tempo, dias: dias, equips: equips, obs: obs }
+    this.treinosService.adicionarPedido(this.selectedPeronal.cadastro.id, treino).then((event) => {
       this.presentAlert()
     })
   }

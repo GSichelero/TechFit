@@ -53,10 +53,9 @@ export class CadastroPage implements OnInit {
   async cadastrar() {
     this.imgUrl ? this.formulario.value.avatar = this.imgUrl : this.formulario.value.avatar;
     await this.firebaseService.cadastrarUser(this.formulario.value).then((ret) =>{
-        this.router.navigateByUrl('/login')
+        this.router.navigateByUrl('/home')
     });
     this.segundoCadastro = false;
-    this.presentAlert();
   }
 
   public verificaCadastro(evento) {
@@ -81,20 +80,5 @@ export class CadastroPage implements OnInit {
     });
 
   }
-
-  async presentAlert() {
-    const alert = await this.alertController.create({
-      header: 'O seu perfil esta sendo analisado pelos nosso administradores. Aguarde confirmação!',
-      buttons: [
-        {
-          text: 'OK',
-          role: 'confirm',
-        },
-      ],
-    });
-
-    await alert.present();
-  }
-
 
 }
