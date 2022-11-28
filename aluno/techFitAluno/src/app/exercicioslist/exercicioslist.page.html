@@ -1,0 +1,25 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Exercícios do dia {{dia}} da semana {{semana}}</ion-title>
+    <ion-buttons slot="start">
+      <ion-menu-button menu="main-menu"></ion-menu-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-list>
+    <ion-item *ngFor="let exercicio of dayExercises">
+      <ion-label>
+        <h1>{{exercicio.nome}}</h1>
+        <h2>Carga: {{exercicio.peso}}Kg</h2>
+        <h2>Repetições: {{exercicio.repeticoes}}</h2>
+        <h2>Séries: {{exercicio.series}}</h2>
+        <h2>Tempo de descanso: {{exercicio.tempoDescanso}} segundos</h2>
+        <h2>Tempo de execução: {{exercicio.tempoExecucao}} segundos</h2>
+      </ion-label>
+      <ion-button (click)="goToExercicio(exercicio.id)">Ver</ion-button>
+    </ion-item>
+  </ion-list>
+
+</ion-content>

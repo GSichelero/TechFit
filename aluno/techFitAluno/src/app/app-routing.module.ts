@@ -44,6 +44,19 @@ const routes: Routes = [
     loadChildren: () => import('./pages/listagem-personal/listagem-personal.module').then( m => m.ListagemPersonalPageModule),
     canActivate: [AuthGuard]
   },
+  {
+    path: 'diaslist',
+    loadChildren: () => import('./diaslist/diaslist.module').then( m => m.DiaslistPageModule)
+  },
+  {
+    path: 'exercicioslist',
+    loadChildren: () => import('./exercicioslist/exercicioslist.module').then( m => m.ExercicioslistPageModule)
+  },
+  {
+    path: 'evolucao-exercicio',
+    loadChildren: () => import('./evolucao-exercicio/evolucao-exercicio.module').then( m => m.EvolucaoExercicioPageModule)
+  },
+
 
 
 
