@@ -1,13 +1,13 @@
 
 <ion-split-pane content-id="menu">
     <ion-menu content-id="menu" type="push">
-        <ion-content *ngIf="user" class="item">
+        <ion-content class="item">
   
-              <div>
+              <!-- <div>
                 <ion-card class="center hide-card">
-                  <!-- <ion-avatar style="height: 130px;width: 130px;">
+                  <ion-avatar style="height: 130px;width: 130px;">
                     <img [src]='selectedPeronal.cadastro.avatar ? selectedPeronal.cadastro.avatar : "https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png"' alt="Silhouette of a person's head" />
-                  </ion-avatar> -->
+                  </ion-avatar> 
                   <ion-card-header>
                     <ion-card-title>{{user.cadastro.nome}}</ion-card-title>
                   </ion-card-header>
@@ -15,7 +15,7 @@
                     {{user.cadastro.especializacao}}
                   </ion-card-content>
                 </ion-card>
-              </div>          
+              </div>           -->
             <ion-list id="menu-list">
                 <ion-item *ngFor="let page of Pages" >
                     

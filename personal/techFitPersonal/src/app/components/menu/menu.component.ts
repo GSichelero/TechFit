@@ -24,10 +24,13 @@ export class MenuComponent implements OnInit {
     , public firebaseService: FirebaseService
     , public router: Router ) { 
 
-    this.alunosService.getUsuarioAutenticado().pipe(filter(usuario => usuario != undefined)).subscribe(usuario => {
-      debugger
-      this.user = usuario;
-    })
+    // this.alunosService.getUsuarioAutenticado().pipe(filter(usuario => usuario != undefined)).subscribe(usuario => {
+    //   debugger
+    //   this.user = usuario;
+    // })
+    this.user = this.alunosService.getUsuarioAutenticado().value;
+    debugger
+
   }
   nextpage(url) {
     this.route.navigate([url]);

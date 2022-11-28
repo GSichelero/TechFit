@@ -44,15 +44,16 @@ export class AlunosService {
   }
 
   // pega todos os usuarios do tipo personal
-  public getAlunosVinculados() {
-    return new Promise<any>((resolve)=> {
-      this.firebase.collection('users')
-        .doc(this.usuario.id)
-        .collection('alunos')
-        .valueChanges().subscribe(users => {
-        resolve(users);
-      })
-    })
+  public getAlunosVinculados(id) {
+    return this.firebase.collection('users')
+    .doc(id)
+    .collection('alunos')
+    .snapshotChanges()
+    .pipe(map(actions => actions.map(a => {
+      const id = a.payload.doc.id;
+      const dado:any = a.payload.doc.data();
+      return {id,...dado};
+    })));
   }
 
   public getById(id) {
@@ -94,6 +95,17 @@ export class AlunosService {
       .collection('pedidos')
       .doc(pedido.id)
       .delete();
+  }
+
+  public cadastraTreino(id, treino){
+    debugger
+    return this.firebase
+    .collection('users')
+    .doc(id)
+    .collection('treinos')
+    .add({
+      treino
+    })
   }
 
 }

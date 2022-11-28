@@ -8,7 +8,20 @@
 <ion-content [fullscreen]="true">
 
 <div *ngIf="usuario">
-  <!-- <ion-img [src]="usuario.foto" alt=""></ion-img> -->
+  <ion-list>
+    <ion-list>
+
+      <ion-item button (click)="treinoAluno(aluno)" style="width: 100%;" *ngFor="let aluno of alunos">
+        <ion-avatar slot="start"  style="height: 70px; width: 70px;">
+          <ion-img [src]="aluno.pedido.treino.avatar" class="avatar-img"></ion-img>
+        </ion-avatar> 
+          <ion-label>{{aluno.pedido.treino.nome}}</ion-label>
+          <ion-label>{{aluno.pedido.treino.tempo}}</ion-label>
+          <ion-label>{{aluno.pedido.treino.dias}}</ion-label>
+      </ion-item>
+
+    </ion-list>
+  </ion-list>
 </div>
 
 </ion-content>

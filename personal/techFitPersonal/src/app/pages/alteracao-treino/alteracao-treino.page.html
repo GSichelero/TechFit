@@ -1,6 +1,8 @@
 <ion-header>
   <ion-toolbar>
     <ion-title>Alteração do Treino {{Treino.nome}}</ion-title>
+
+    <ion-button (click)="cadastraTreino()">cadastraTreino</ion-button>
   </ion-toolbar>
 </ion-header>
 
@@ -10,7 +12,7 @@
       <ion-col>
         <ion-list>
           <ion-item  *ngFor="let Exercicio of ExerciciosPadrao" >
-            {{Exercicio.nome}}
+            {{Exercicio}}
             <ion-buttons slot="end">
               <ion-button [strong]="true" (click)="adicionaExercicio(Exercicio)" slot="end">Add</ion-button>
             </ion-buttons>
@@ -19,13 +21,14 @@
       </ion-col>
       <ion-col>
         <div style="margin: 1px;">
-          <ion-button (click)="filtraListagemExercicoSemana(0)">S</ion-button>
-          <ion-button (click)="filtraListagemExercicoSemana(1)">T</ion-button>
-          <ion-button (click)="filtraListagemExercicoSemana(2)">Q</ion-button>
-          <ion-button (click)="filtraListagemExercicoSemana(3)">Q</ion-button>
-          <ion-button (click)="filtraListagemExercicoSemana(4)">S</ion-button>
-          <ion-button (click)="filtraListagemExercicoSemana(5)">S</ion-button>
-          <ion-button (click)="filtraListagemExercicoSemana(6)">D</ion-button>
+
+          <ion-button (click)="filtraListagemExercicoSemana(0)" #segunda>S</ion-button>
+          <ion-button (click)="filtraListagemExercicoSemana(1)" #terça>T</ion-button>
+          <ion-button (click)="filtraListagemExercicoSemana(2)" #quinta>Q</ion-button>
+          <ion-button (click)="filtraListagemExercicoSemana(3)" #quarta>Q</ion-button>
+          <ion-button (click)="filtraListagemExercicoSemana(4)" #sexta>S</ion-button>
+          <ion-button (click)="filtraListagemExercicoSemana(5)" #sabado>S</ion-button>
+          <ion-button (click)="filtraListagemExercicoSemana(6)" #domingo>D</ion-button>
         </div>
         <ion-list>
           <ion-reorder-group [disabled]="false" (ionItemReorder)="handleReorder($any($event))">
@@ -39,4 +42,5 @@
       </ion-col>
     </ion-row>
   </ion-grid>
+  <ion-item><button (click)="teste()"></button></ion-item>
 </ion-content>
