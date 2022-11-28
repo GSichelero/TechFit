@@ -16,9 +16,7 @@ export class PedidosPage implements OnInit {
 
     this.usuario = this.alunoService. getUsuarioAutenticado().pipe(filter(usuario => usuario != undefined)).subscribe(usuario => {
       this.pedidos = this.alunoService.getAllPedidos(usuario.cadastro.id).subscribe(ped => {
-        console.log(ped);
         this.pedidos = ped;
-        debugger
       });
     })
 

@@ -19,7 +19,6 @@ export class MenuComponent implements OnInit {
   constructor( private personalService: PersonalService
     , public firebaseService: FirebaseService) { 
       this.personalService.getUsuarioAutenticado().pipe(filter(usuario => usuario != undefined)).subscribe(usuario => {
-        console.log(this.Pages)
         this.user = usuario;
       })
     }

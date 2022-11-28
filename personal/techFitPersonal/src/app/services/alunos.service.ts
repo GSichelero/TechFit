@@ -29,6 +29,7 @@ export class AlunosService {
 
   public getUsuarioAutenticado() {
     this.usuarioSubject = new BehaviorSubject<any>(this.usuario);
+    console.log(this.usuarioSubject)
     return this.usuarioSubject
   }
 
@@ -40,7 +41,6 @@ export class AlunosService {
 
       this.usuario = {id, ...docRef.data() as any};
       this.usuarioSubject.next(this.usuario);
-      console.log(this.usuario);
   }
 
   // pega todos os usuarios do tipo personal
@@ -51,7 +51,6 @@ export class AlunosService {
         .collection('alunos')
         .valueChanges().subscribe(users => {
         resolve(users);
-        console.log(users);
       })
     })
   }
@@ -89,7 +88,6 @@ export class AlunosService {
   }
 
   public descartarPedido(id, pedido){
-    debugger
     return this.firebase
       .collection('users')
       .doc(id)

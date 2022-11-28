@@ -28,6 +28,7 @@ export class PersonalService {
 
   public getUsuarioAutenticado() {
     this.usuarioSubject = new BehaviorSubject<any>(this.usuario);
+    console.log(this.usuarioSubject)
     return this.usuarioSubject
   }
 
@@ -39,7 +40,6 @@ export class PersonalService {
 
       this.usuario = {id, ...docRef.data() as any};
       this.usuarioSubject.next(this.usuario);
-      console.log(this.usuario);
   }
 
 // pega todos os usuarios do tipo personal

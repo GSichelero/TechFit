@@ -4,7 +4,7 @@ import { AngularFireStorage, AngularFireUploadTask } from '@angular/fire/compat/
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { FirebaseService } from 'src/app/services/firebase.service';
-import { AlertController } from '@ionic/angular';
+import { AlertController, ToastController } from '@ionic/angular';
 
 
 @Component({
@@ -31,7 +31,8 @@ export class CadastroPage implements OnInit {
     , public router: Router
     , private afs:AngularFireStorage
     , private af: AngularFirestore
-    , public alertController: AlertController) { 
+    , public alertController: AlertController
+    , public toastController: ToastController) { 
     this.formulario = fb.group({
       id: [null],
       nome: ['', Validators.compose([Validators.required, Validators.minLength(5)])],
@@ -51,10 +52,19 @@ export class CadastroPage implements OnInit {
   }
 
   async cadastrar() {
+    if(this.formulario.invalid){
+      return this.formulario.markAllAsTouched();
+    }
     this.imgUrl ? this.formulario.value.avatar = this.imgUrl : this.formulario.value.avatar;
+
+    try {
     await this.firebaseService.cadastrarUser(this.formulario.value).then((ret) =>{
         this.router.navigateByUrl('/home')
     });
+    }catch (e) {
+      this.presentToast(e.message);
+      console.log(e);
+    }
     this.segundoCadastro = false;
   }
 
@@ -76,9 +86,18 @@ export class CadastroPage implements OnInit {
     this.task =  this.afs.upload(filePath, file);  
     (await this.task).ref.getDownloadURL().then(url => {
       this.imgUrl = url;
-      console.log(url); 
     });
 
+  }
+
+  async presentToast(message) {
+    const toast = await this.toastController.create({
+      message,
+      color: 'danger',
+      duration: 3000
+    });
+
+    await toast.present();
   }
 
 }

@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
 import { AuthGuard } from './shared/auth.guard';
+import { SecureInnerPagesGuard } from './shared/secure-inner-pages.guard';
 
 const routes: Routes = [
   {
@@ -14,11 +15,13 @@ const routes: Routes = [
   },
   {
     path: 'login/cadastro',
-    loadChildren: () => import('./pages/cadastro/cadastro.module').then( m => m.CadastroPageModule)
+    loadChildren: () => import('./pages/cadastro/cadastro.module').then( m => m.CadastroPageModule),
+    canActivate: [SecureInnerPagesGuard],
   },
   {
     path: 'login',
-    loadChildren: () => import('./pages/login/login.module').then( m => m.LoginPageModule)
+    loadChildren: () => import('./pages/login/login.module').then( m => m.LoginPageModule),
+    canActivate: [SecureInnerPagesGuard],
   },
   {
     path: 'listagem/semanas',
@@ -29,9 +32,11 @@ const routes: Routes = [
     path: 'alteracao/treino',
     loadChildren: () => import('./pages/alteracao-treino/alteracao-treino.module').then( m => m.AlteracaoTreinoPageModule),
     canActivate: [AuthGuard]
-  },  {
+  },
+  {
     path: 'pedidos',
-    loadChildren: () => import('./pages/pedidos/pedidos.module').then( m => m.PedidosPageModule)
+    loadChildren: () => import('./pages/pedidos/pedidos.module').then( m => m.PedidosPageModule),
+    canActivate: [AuthGuard]
   }
 
 

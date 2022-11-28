@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { ToastController } from '@ionic/angular';
 import { FirebaseService } from '../services/firebase.service';
 
 @Component({
@@ -10,7 +11,8 @@ import { FirebaseService } from '../services/firebase.service';
 export class LoginPage implements OnInit {
 
   constructor( private firebaseService: FirebaseService 
-    , private router: Router) { }
+    , private router: Router
+    , public toastController: ToastController) { }
 
   ngOnInit() {
   }
@@ -20,8 +22,19 @@ export class LoginPage implements OnInit {
       await this.firebaseService.login(email, senha);
       this.router.navigateByUrl('home');
     }catch (e) {
+      this.presentToast(e.message)
       console.log(e);
     }
+  }
+
+  async presentToast(message) {
+    const toast = await this.toastController.create({
+      message,
+      color: 'danger',
+      duration: 3000
+    });
+
+    await toast.present();
   }
 
 }

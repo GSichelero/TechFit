@@ -55,6 +55,7 @@ export class FirebaseService {
   
   get isLoggedIn(): boolean {
     const user = JSON.parse(localStorage.getItem('user')!);
+    //debugger
     return user !== 'null' ? true : false;
   }
   

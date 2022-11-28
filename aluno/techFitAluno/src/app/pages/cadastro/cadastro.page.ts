@@ -4,6 +4,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AngularFireStorage, AngularFireUploadTask } from '@angular/fire/compat/storage';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
+import { ToastController } from '@ionic/angular';
 
 @Component({
   selector: 'app-cadastro',
@@ -24,7 +25,8 @@ export class CadastroPage implements OnInit {
     , public fb: FormBuilder
     , public router: Router
     , private afs:AngularFireStorage
-    , private af: AngularFirestore ) {
+    , private af: AngularFirestore 
+    , public toastController: ToastController) {
 
     this.formulario = fb.group({
       id: [null],
@@ -32,7 +34,7 @@ export class CadastroPage implements OnInit {
       email: ['',Validators.compose([Validators.required, Validators.email])],
       senha: ['', Validators.compose([Validators.required, Validators.minLength(6)])],
       senhaConf: ['', Validators.compose([Validators.required, Validators.minLength(6)])],
-      avatar: [null],
+      avatar: [''],
       idade: [''],
       sexo: ['',Validators.required],
       peso: ['',Validators.required],
@@ -46,10 +48,18 @@ export class CadastroPage implements OnInit {
 
 
   async cadastrar() {
+    if(this.formulario.invalid){
+      return this.formulario.markAllAsTouched();
+    }
     this.imgUrl ? this.formulario.value.avatar = this.imgUrl : this.formulario.value.avatar;
-    await this.firebaseService.cadastrarUser(this.formulario.value).then(() =>
-        this.router.navigateByUrl('/home')
-    );
+    try {
+      await this.firebaseService.cadastrarUser(this.formulario.value).then(() =>
+          this.router.navigateByUrl('/home')
+      );
+    }catch (e) {
+      this.presentToast(e.message);
+      console.log(e);
+    }
     this.segundoCadastro = false;
   }
 
@@ -70,10 +80,18 @@ export class CadastroPage implements OnInit {
     this.task =  this.afs.upload(filePath, file);  
     (await this.task).ref.getDownloadURL().then(url => {
       this.imgUrl = url;
-      console.log(url); 
     });
   }
 
+  async presentToast(message) {
+    const toast = await this.toastController.create({
+      message,
+      color: 'danger',
+      duration: 3000
+    });
+
+    await toast.present();
+  }
 
 }
 

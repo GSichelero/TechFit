@@ -25,6 +25,7 @@ export class MenuComponent implements OnInit {
     , public router: Router ) { 
 
     this.alunosService.getUsuarioAutenticado().pipe(filter(usuario => usuario != undefined)).subscribe(usuario => {
+      debugger
       this.user = usuario;
     })
   }
