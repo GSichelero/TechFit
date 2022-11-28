@@ -98,7 +98,6 @@ export class AlunosService {
   }
 
   public cadastraTreino(id, treino){
-    debugger
     return this.firebase
     .collection('users')
     .doc(id)

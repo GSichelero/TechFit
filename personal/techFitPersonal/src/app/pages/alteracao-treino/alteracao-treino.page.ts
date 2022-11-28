@@ -81,7 +81,9 @@ export class AlteracaoTreinoPage implements OnInit {
 
     modal.onWillDismiss().then( result => {
       if (result.role == 'confirm') {
+        console.log(Exercicio)
         this.exerciciosFiltrados.push(result.data);
+        result.data.nome = Exercicio;
         result.data.diaSemana = this.diaSelect;
         this.exerciocios.push(result.data)
       }
@@ -98,9 +100,7 @@ export class AlteracaoTreinoPage implements OnInit {
     const domingo = this.exerciocios.filter(es => es.diaSemana == 7);
 
     const exerciosSemana = {segunda, terca, quarta, quinta, sexta, sabado, domingo}
-    debugger
     this.alunosService.cadastraTreino(this.infoAluno.id, exerciosSemana)
-    console.log(this.exerciocios)
     
   }
 }
