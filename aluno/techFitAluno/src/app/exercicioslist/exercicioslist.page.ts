@@ -133,4 +133,8 @@ export class ExercicioslistPage implements OnInit {
       .then(toastData => toastData.present());
   }
 
+  goToExercicio(exercicioName) {
+    this.route.navigate(['/evolucao-exercicio', {exercicioName}]);
+  }
+
 }
