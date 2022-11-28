@@ -18,8 +18,6 @@ export class ListagemSemanasPage implements OnInit {
   ];
   constructor(private route: Router, private routeActivate: ActivatedRoute
     , private alunoService: AlunosService) { 
-    console.log(this.aluno)
-
     // this.alunoService.getById(this.aluno.id).then((aluno)=>{
     //   this.aluno = aluno
     // })

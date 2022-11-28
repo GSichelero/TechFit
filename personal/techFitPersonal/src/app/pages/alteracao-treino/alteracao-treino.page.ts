@@ -46,7 +46,7 @@ export class AlteracaoTreinoPage implements OnInit {
     , private routeActivate: ActivatedRoute) { }
 
   ngOnInit() {
-    //this.exerciciosFiltrados = this.ExerciciosSemana.filter(es => es.diaSemana == 0);
+    this.alunosService.obtemTreino(this.infoAluno.id).subscribe(treino => console.log(treino));
     this.filtraListagemExercicoSemana(0);
   }
 
@@ -55,11 +55,8 @@ export class AlteracaoTreinoPage implements OnInit {
   }
 
   public filtraListagemExercicoSemana(diaSemana){
-    this.exerciciosFiltrados = this.ExerciciosSemana.filter(es => es.diaSemana == diaSemana);
+    this.exerciciosFiltrados = this.exerciocios.filter(es => es.diaSemana == diaSemana);
     this.diaSelect = diaSemana;
-    this.horasDiaSemana = this.exerciciosFiltrados.reduce((soma, semana) => {
-      return soma + semana.horas;
-    }, 0);
   }
 
   public adicionaExercicio(Exercicio){
@@ -81,7 +78,6 @@ export class AlteracaoTreinoPage implements OnInit {
 
     modal.onWillDismiss().then( result => {
       if (result.role == 'confirm') {
-        console.log(Exercicio)
         this.exerciciosFiltrados.push(result.data);
         result.data.nome = Exercicio;
         result.data.diaSemana = this.diaSelect;

@@ -37,7 +37,12 @@ const routes: Routes = [
     path: 'pedidos',
     loadChildren: () => import('./pages/pedidos/pedidos.module').then( m => m.PedidosPageModule),
     canActivate: [AuthGuard]
+  },
+  {
+    path: 'listagem/treinos',
+    loadChildren: () => import('./pages/listagem-treinos/listagem-treinos.module').then( m => m.ListagemTreinosPageModule)
   }
+
 
 
 

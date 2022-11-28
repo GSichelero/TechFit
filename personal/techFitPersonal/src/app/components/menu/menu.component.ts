@@ -17,7 +17,8 @@ export class MenuComponent implements OnInit {
     { title: 'Home', url: '/home' },
     { title: 'Listagem Semanas', url: '/listagem/semanas' },
     { title: 'Alteração Treino', url: '/alteracao/treino'},
-    { title: 'Pedidos', url: '/pedidos'}
+    { title: 'Pedidos', url: '/pedidos'},
+    { title: 'Treinos', url: '/listagem/treinos'}
   ];
   constructor( private route: Router
     , private alunosService: AlunosService
@@ -29,7 +30,7 @@ export class MenuComponent implements OnInit {
     //   this.user = usuario;
     // })
     this.user = this.alunosService.getUsuarioAutenticado().value;
-    debugger
+    console.log(this.user);
 
   }
   nextpage(url) {

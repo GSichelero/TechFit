@@ -107,4 +107,22 @@ export class AlunosService {
     })
   }
 
+  public obtemTreino(id){
+    return this.firebase
+    .collection('users')
+    .doc(id)
+    .collection('treinos')
+    .snapshotChanges()
+    .pipe(
+        map(treinos => 
+          treinos.map(a => {
+            const id = a.payload.doc.id;
+            const dado:any = a.payload.doc.data();
+            return {id,...dado};
+          }
+          )
+        )
+      );
+  }
+
 }

@@ -5,7 +5,7 @@
         Horas de treino
     </ion-list-header>
     <ion-item *ngFor="let Semana of Semanas" [id]="Semana.id" >
-        <ion-button (click)="alteraTreino(Semana)" [queryParams]="{semana: Semana.id}">{{Semana.nome}}</ion-button>
+        <ion-button (click)="alteraTreino(Semana)">{{Semana.nome}}</ion-button>
     </ion-item>
 </ion-list>
 
