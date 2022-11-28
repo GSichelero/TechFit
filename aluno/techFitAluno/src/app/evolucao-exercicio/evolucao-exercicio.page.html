@@ -1,9 +1,66 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title>evolucaoExercicio</ion-title>
+    <ion-title>Evolução</ion-title>
+    <ion-buttons slot="start">
+      <ion-menu-button menu="main-menu"></ion-menu-button>
+    </ion-buttons>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
+  <ion-card class="welcome-card">
+    <ion-card-header>
+      <ion-card-subtitle>Sua Progressão Geral</ion-card-subtitle>
+      <ion-card-title>{{exercicioName}}</ion-card-title>
+    </ion-card-header>
+    <ion-card-content>
+      <canvas #lineChart></canvas>
+    </ion-card-content>
+  </ion-card>
+  <ion-card class="welcome-card">
+    <ion-card-header>
+      <ion-card-subtitle>{{exercicioName}}</ion-card-subtitle>
+      <ion-card-title>Progressão de Carga (Kg)</ion-card-title>
+    </ion-card-header>
+    <ion-card-content>
+      <canvas #lineChartCarga></canvas>
+    </ion-card-content>
+  </ion-card>
+  <ion-card class="welcome-card">
+    <ion-card-header>
+      <ion-card-subtitle>{{exercicioName}}</ion-card-subtitle>
+      <ion-card-title>Progressão de Repetições</ion-card-title>
+    </ion-card-header>
+    <ion-card-content>
+      <canvas #lineChartRepeticoes></canvas>
+    </ion-card-content>
+  </ion-card>
+  <ion-card class="welcome-card">
+    <ion-card-header>
+      <ion-card-subtitle>{{exercicioName}}</ion-card-subtitle>
+      <ion-card-title>Progressão de Séries</ion-card-title>
+    </ion-card-header>
+    <ion-card-content>
+      <canvas #lineChartSeries></canvas>
+    </ion-card-content>
+  </ion-card>
+  <ion-card class="welcome-card">
+    <ion-card-header>
+      <ion-card-subtitle>{{exercicioName}}</ion-card-subtitle>
+      <ion-card-title>Progressão de Tempo de Descanso (segundos)</ion-card-title>
+    </ion-card-header>
+    <ion-card-content>
+      <canvas #lineChartTempoDescanso></canvas>
+    </ion-card-content>
+  </ion-card>
+  <ion-card class="welcome-card">
+    <ion-card-header>
+      <ion-card-subtitle>{{exercicioName}}</ion-card-subtitle>
+      <ion-card-title>Progressão de Tempo de Execução (segundos)</ion-card-title>
+    </ion-card-header>
+    <ion-card-content>
+      <canvas #lineChartTempoExecucao></canvas>
+    </ion-card-content>
+  </ion-card>
 
 </ion-content>
